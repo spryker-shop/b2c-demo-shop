@@ -22,8 +22,6 @@ class SynchronizationConfig extends SprykerSynchronizationConfig
      * @api
      *
      * @deprecated Will be removed in the next major without replacement. Will be switched to normalized format.
-     *
-     * @return bool
      */
     public function isSingleKeyFormatNormalized(): bool
     {

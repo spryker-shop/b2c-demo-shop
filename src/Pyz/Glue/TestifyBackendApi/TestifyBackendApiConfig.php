@@ -13,17 +13,11 @@ use Spryker\Glue\TestifyBackendApi\TestifyBackendApiConfig as SprykerTestifyBack
 
 class TestifyBackendApiConfig extends SprykerTestifyBackendApiConfig
 {
-    /**
-     * @return string
-     */
     public function getCodeceptionConfiguration(): string
     {
         return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'tests/PyzTest/Zed/TestifyBackendApi/codeception.dynamic.fixtures.yml';
     }
 
-    /**
-     * @return string
-     */
     public function getCodeceptionSuiteName(): string
     {
         return 'DynamicFixture';

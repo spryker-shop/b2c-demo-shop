@@ -25,22 +25,11 @@ use PyzTest\Yves\Cart\PageObject\CartListPage;
  */
 class AvailabilityAddToCartCest
 {
-    /**
-     * @param \PyzTest\Yves\Availability\AvailabilityPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(AvailabilityPresentationTester $i): void
     {
         $i->amYves();
     }
 
-    /**
-     * @param \PyzTest\Yves\Availability\AvailabilityPresentationTester $i
-     * @param \Codeception\Scenario $scenario
-     *
-     * @return void
-     */
     public function testAddToCartWhenBiggerQuantityIsUsed(AvailabilityPresentationTester $i, Scenario $scenario): void
     {
         $scenario->skip('This test needs to be refactored since we can not use add to cart URL directly.');
@@ -53,9 +42,9 @@ class AvailabilityAddToCartCest
 
         $i->see(CartListPage::CART_HEADER);
 
-//        $i->fillField(CartListPage::FIRST_CART_ITEM_QUANTITY_INPUT_XPATH, 50);
-//        $i->click(CartListPage::FIRST_CART_ITEM_CHANGE_QUANTITY_BUTTON_XPATH);
-//
-//        $i->seeInSource(AvailabilityPresentationTester::CART_PRE_CHECK_AVAILABILITY_ERROR_MESSAGE);
+    //        $i->fillField(CartListPage::FIRST_CART_ITEM_QUANTITY_INPUT_XPATH, 50);
+    //        $i->click(CartListPage::FIRST_CART_ITEM_CHANGE_QUANTITY_BUTTON_XPATH);
+    //
+    //        $i->seeInSource(AvailabilityPresentationTester::CART_PRE_CHECK_AVAILABILITY_ERROR_MESSAGE);
     }
 }

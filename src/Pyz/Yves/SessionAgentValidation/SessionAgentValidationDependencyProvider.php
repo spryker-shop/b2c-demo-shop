@@ -17,17 +17,11 @@ use SprykerShop\Yves\SessionAgentValidationExtension\Dependency\Plugin\SessionAg
 
 class SessionAgentValidationDependencyProvider extends SprykerSessionAgentValidationDependencyProvider
 {
-    /**
-     * @return \SprykerShop\Yves\SessionAgentValidationExtension\Dependency\Plugin\SessionAgentSaverPluginInterface
-     */
     protected function getSessionAgentSaverPlugin(): SessionAgentSaverPluginInterface
     {
         return new SessionRedisSessionAgentSaverPlugin();
     }
 
-    /**
-     * @return \SprykerShop\Yves\SessionAgentValidationExtension\Dependency\Plugin\SessionAgentValidatorPluginInterface
-     */
     protected function getSessionAgentValidatorPlugin(): SessionAgentValidatorPluginInterface
     {
         return new SessionRedisSessionAgentValidatorPlugin();

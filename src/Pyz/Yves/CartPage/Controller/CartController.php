@@ -25,10 +25,7 @@ class CartController extends SprykerCartController
     public const REQUEST_HEADER_REFERER = 'referer';
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $sku
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function addAction(Request $request, $sku): RedirectResponse // phpcs:ignore
     {
@@ -38,10 +35,7 @@ class CartController extends SprykerCartController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $sku
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function removeAction(Request $request, $sku): RedirectResponse // phpcs:ignore
     {
@@ -50,11 +44,6 @@ class CartController extends SprykerCartController
         return $this->redirect($request);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     protected function redirect(Request $request): RedirectResponse
     {
         if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {

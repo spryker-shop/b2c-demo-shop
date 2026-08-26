@@ -20,8 +20,6 @@ use Spryker\Zed\StockAddress\Communication\Plugin\Stock\StockAddressStockPostUpd
 class StockDependencyProvider extends SprykerStockDependencyProvider
 {
     /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
      * @return array<\Spryker\Zed\StockExtension\Dependency\Plugin\StockUpdateHandlerPluginInterface>
      */
     protected function getStockUpdateHandlerPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter

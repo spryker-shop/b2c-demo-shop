@@ -15,17 +15,11 @@ use Spryker\Zed\ProductSetPageSearch\ProductSetPageSearchConfig as SprykerProduc
 
 class ProductSetPageSearchConfig extends SprykerProductSetPageSearchConfig
 {
-    /**
-     * @return string|null
-     */
     public function getProductSetSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

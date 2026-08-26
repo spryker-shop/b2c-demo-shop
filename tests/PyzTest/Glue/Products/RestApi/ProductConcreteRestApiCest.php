@@ -28,16 +28,8 @@ use Spryker\Glue\ProductsRestApi\ProductsRestApiConfig;
  */
 class ProductConcreteRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\Products\RestApi\Fixtures\ProductsRestApiFixtures
-     */
     protected ProductsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(ProductsApiTester $I): void
     {
         /** @var \PyzTest\Glue\Products\RestApi\Fixtures\ProductsRestApiFixtures $fixtures */
@@ -48,10 +40,6 @@ class ProductConcreteRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductConcrete(ProductsApiTester $I): void
     {
@@ -82,10 +70,6 @@ class ProductConcreteRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductConcreteWithProductPriceRelationship(ProductsApiTester $I): void
     {
@@ -126,10 +110,6 @@ class ProductConcreteRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Products\ProductsApiTester $I
-     *
-     * @return void
      */
     public function requestProductConcreteByNotExistingProductConcreteSku(ProductsApiTester $I): void
     {

@@ -39,11 +39,6 @@ class PaymentMethodMessageCest
      */
     protected const PROVIDER_NAME = 'provider-name';
 
-    /**
-     * @param \PyzTest\Zed\MessageBroker\PaymentMethodPresentationTester $I
-     *
-     * @return void
-     */
     public function testAddPaymentMethodMessageIsSuccessfullyHandled(PaymentMethodPresentationTester $I): void
     {
         // Arrange
@@ -83,11 +78,6 @@ class PaymentMethodMessageCest
         $I->cleanupPaymentMethodByPaymentMethodKey($paymentMethodKey);
     }
 
-    /**
-     * @param \PyzTest\Zed\MessageBroker\PaymentMethodPresentationTester $I
-     *
-     * @return void
-     */
     public function testPaymentMethodRemovedMessageIsSuccessfullyHandled(PaymentMethodPresentationTester $I): void
     {
         // Arrange

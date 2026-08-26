@@ -36,8 +36,6 @@ export default class NodeAnimator extends Component {
     };
     protected isTargetInViewport = true;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.triggers = <HTMLElement[]>Array.from(document.getElementsByClassName(this.triggerClassName));
         this.animationDuration = this.animationDurationValue;

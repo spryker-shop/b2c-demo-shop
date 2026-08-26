@@ -41,10 +41,6 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
      */
     protected $resolved = [];
 
-    /**
-     * @param string $source
-     * @param string $target
-     */
     public function __construct(string $source = self::KEY_SOURCE, string $target = self::KEY_TARGET)
     {
         $this->source = $source;
@@ -52,11 +48,7 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException
-     *
-     * @return void
      */
     public function execute(DataSetInterface $dataSet): void
     {
@@ -75,11 +67,6 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
         $dataSet[$this->target] = $this->resolved[$dataSet[$this->source]];
     }
 
-    /**
-     * @param string $taxSetName
-     *
-     * @return int
-     */
     protected function resolveIdStock(string $taxSetName): int
     {
         $taxSetEntity = SpyTaxSetQuery::create()

@@ -24,9 +24,6 @@ class ZedFormTypeDynamicTypeExtension extends AbstractSprykerDynamicTypeExtensio
         'getQueryContainer' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractType::class;

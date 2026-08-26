@@ -15,9 +15,6 @@ use Spryker\Client\StorageRedis\Plugin\StorageRedisPlugin;
 
 class StorageDependencyProvider extends SprykerStorageDependencyProvider
 {
-    /**
-     * @return \Spryker\Client\StorageExtension\Dependency\Plugin\StoragePluginInterface|null
-     */
     protected function getStoragePlugin(): ?StoragePluginInterface
     {
         return new StorageRedisPlugin();

@@ -28,21 +28,11 @@ use PyzTest\Yves\Customer\PageObject\CustomerProfilePage;
  */
 class CustomerOverviewCest
 {
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(CustomerPresentationTester $i): void
     {
         $i->amYves();
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanOpenOverviewPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -53,11 +43,6 @@ class CustomerOverviewCest
         $i->see(CustomerOverviewPage::BOX_HEADLINE_NEWSLETTER, 'h2');
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testCustomerWithoutAddressShouldSeeAddAddressInfoText(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -67,11 +52,6 @@ class CustomerOverviewCest
         // $i->see(CustomerOverviewPage::INFO_TEXT_ADD_BILLING_ADDRESS);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanGoFromOverviewToProfilePage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -80,11 +60,6 @@ class CustomerOverviewCest
         $i->amOnPage(CustomerProfilePage::URL);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanGoFromOverviewToAddressesPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -93,11 +68,6 @@ class CustomerOverviewCest
         $i->amOnPage(CustomerAddressesPage::URL);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanGoFromOverviewToOrdersPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -106,11 +76,6 @@ class CustomerOverviewCest
         $i->amOnPage(CustomerOrdersPage::URL);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanGoFromOverviewToNewsletterPage(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();

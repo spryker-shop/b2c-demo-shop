@@ -31,9 +31,6 @@ class MultiFactorAuthRestApiCest
      */
     protected const RESOURCE_MULTI_FACTOR_AUTH_TYPES = 'multi-factor-auth-types';
 
-    /**
-     * @var string|null
-     */
     protected ?string $mfaCode = null;
 
     /**
@@ -46,16 +43,8 @@ class MultiFactorAuthRestApiCest
      */
     protected const INVALID_MFA_TYPE = 'invalid-type';
 
-    /**
-     * @var \PyzTest\Glue\MultiFactorAuth\RestApi\Fixtures\MultiFactorAuthRestApiFixtures|null
-     */
     protected ?MultiFactorAuthRestApiFixtures $fixtures = null;
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(MultiFactorAuthRestApiTester $I): void
     {
         /** @var \PyzTest\Glue\MultiFactorAuth\RestApi\Fixtures\MultiFactorAuthRestApiFixtures $fixtures */
@@ -63,11 +52,6 @@ class MultiFactorAuthRestApiCest
         $this->fixtures = $fixtures;
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestGetMultiFactorAuthTypes(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -82,11 +66,6 @@ class MultiFactorAuthRestApiCest
         $I->seeResponseDataContainsResourceCollectionOfType(static::RESOURCE_MULTI_FACTOR_AUTH_TYPES);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestActivateMultiFactorAuthType(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -101,11 +80,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestActivateMultiFactorAuthTypeWithInvalidType(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -129,11 +103,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestVerifyMultiFactorAuthType(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -151,11 +120,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestVerifyMultiFactorAuthTypeWithoutActivation(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -171,11 +135,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestVerifyMultiFactorAuthTypeWithInvalidCode(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -196,11 +155,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthType(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -218,11 +172,6 @@ class MultiFactorAuthRestApiCest
         $I->seeResponseCodeIs(HttpCode::NO_CONTENT);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthTypeWithoutActivation(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -236,11 +185,6 @@ class MultiFactorAuthRestApiCest
         $I->seeResponseIsJson();
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthTypeWithInvalidCode(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -264,11 +208,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestDeactivateMultiFactorAuthTypeWithoutVerification(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -290,11 +229,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestCreateCartWithActivatedMultiFactorAuth(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -319,11 +253,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestCreateCartWithActivatedMultiFactorAuthButInvalidCode(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -348,11 +277,6 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     public function requestCreateCartWithActivatedMultiFactorAuthWithoutCode(MultiFactorAuthRestApiTester $I): void
     {
         // Arrange
@@ -378,22 +302,12 @@ class MultiFactorAuthRestApiCest
         $this->deactivateMultiFactorAuth($I);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     protected function activateMultiFactorAuth(MultiFactorAuthRestApiTester $I): void
     {
         $requestPayload = $this->fixtures->createRequestPayload(MultiFactorAuthConfig::RESOURCE_MULTI_FACTOR_AUTH_TYPE_ACTIVATE);
         $I->sendPost($this->fixtures->generateUrl(MultiFactorAuthConfig::RESOURCE_MULTI_FACTOR_AUTH_TYPE_ACTIVATE), $requestPayload);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     protected function verifyMultiFactorAuth(MultiFactorAuthRestApiTester $I): void
     {
         $this->mfaCode = $I->getCustomerMultiFactorAuthCodeFromDatabase(
@@ -408,11 +322,6 @@ class MultiFactorAuthRestApiCest
         $I->sendPost($this->fixtures->generateUrl(MultiFactorAuthConfig::RESOURCE_MULTI_FACTOR_AUTH_TYPE_VERIFY), $requestPayload);
     }
 
-    /**
-     * @param \PyzTest\Glue\MultiFactorAuth\MultiFactorAuthRestApiTester $I
-     *
-     * @return void
-     */
     protected function deactivateMultiFactorAuth(MultiFactorAuthRestApiTester $I): void
     {
         if ($this->mfaCode === null) {

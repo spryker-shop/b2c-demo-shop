@@ -68,19 +68,13 @@ class ProductReviewForm extends AbstractType
      */
     protected const VALIDATION_RATING_MESSAGE = 'validation.choice';
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'productReviewForm';
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array<mixed> $options
-     *
-     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
@@ -93,8 +87,6 @@ class ProductReviewForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addRatingField(FormBuilderInterface $builder)
@@ -146,8 +138,6 @@ class ProductReviewForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addSummaryField(FormBuilderInterface $builder)
@@ -168,8 +158,6 @@ class ProductReviewForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addDescriptionField(FormBuilderInterface $builder)
@@ -193,8 +181,6 @@ class ProductReviewForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addNicknameField(FormBuilderInterface $builder)
@@ -215,8 +201,6 @@ class ProductReviewForm extends AbstractType
     }
 
     /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
      * @return $this
      */
     protected function addProductField(FormBuilderInterface $builder)

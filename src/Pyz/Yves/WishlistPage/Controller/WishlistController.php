@@ -27,11 +27,6 @@ class WishlistController extends SprykerWishlistController
      */
     public const REQUEST_HEADER_REFERER = 'referer';
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     public function addItemAction(Request $request): RedirectResponse
     {
         $wishlistItemTransfer = $this->getWishlistItemTransferFromRequest($request);

@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @mixin configurable-bundle-widget-configured-bundle-product($name: '.configured-bundle-product') {
     #{$name} {
         padding: 0 rem(15) rem(21) 0;
@@ -12,7 +14,7 @@
 
         &__title {
             display: block;
-            font: fw(regular) map-get($setting-font-size, default) $setting-font-family-additional;
+            font: fw(regular) map.get($setting-font-size, default) $setting-font-family-additional;
 
             &--bold {
                 font-weight: fw(bold);

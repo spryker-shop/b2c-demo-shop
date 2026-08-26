@@ -24,8 +24,6 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
      * @api
      *
      * @param array<int> $productAbstractIds
-     *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria
      */
     public function queryProductAbstractByIds(array $productAbstractIds): ModelCriteria
     {
@@ -54,10 +52,6 @@ class ProductStorageQueryContainer extends SprykerProductStorageQueryContainer
 
     /**
      * @api
-     *
-     * @param int $idProductConcrete
-     *
-     * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
     public function queryBundledProductIdsByProductConcreteId(int $idProductConcrete): SpyProductBundleQuery
     {

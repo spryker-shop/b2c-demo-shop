@@ -42,81 +42,43 @@ class ProductOptionsCartReorderRestApiFixtures implements FixturesBuilderInterfa
      */
     protected const TEST_USERNAME = 'ProductConcreteCartReorderRestApiFixtures';
 
-    /**
-     * @var \Generated\Shared\Transfer\StoreTransfer
-     */
     protected StoreTransfer $storeTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransferWithProductOptions;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductOptionTransfer
-     */
     protected ProductOptionTransfer $productOptionTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\SaveOrderTransfer
-     */
     protected SaveOrderTransfer $orderWithProductOptions;
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransferWithProductOptions(): ProductConcreteTransfer
     {
         return $this->productConcreteTransferWithProductOptions;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductOptionTransfer
-     */
     public function getProductOptionTransfer(): ProductOptionTransfer
     {
         return $this->productOptionTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SaveOrderTransfer
-     */
     public function getOrderWithProductOptions(): SaveOrderTransfer
     {
         return $this->orderWithProductOptions;
     }
 
-    /**
-     * @param \PyzTest\Glue\CartReorder\CartReorderApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(CartReorderApiTester $I): FixturesContainerInterface
     {
         $I->configureStateMachine();
@@ -132,11 +94,6 @@ class ProductOptionsCartReorderRestApiFixtures implements FixturesBuilderInterfa
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\CartReorder\CartReorderApiTester $I
-     *
-     * @return \Generated\Shared\Transfer\ProductOptionTransfer
-     */
     protected function createProductOption(CartReorderApiTester $I): ProductOptionTransfer
     {
         $productOptionGroupTransfer = $I->haveProductOptionGroupWithValues(
@@ -165,11 +122,6 @@ class ProductOptionsCartReorderRestApiFixtures implements FixturesBuilderInterfa
             ->setTaxRate(19.00);
     }
 
-    /**
-     * @param \PyzTest\Glue\CartReorder\CartReorderApiTester $I
-     *
-     * @return \Generated\Shared\Transfer\SaveOrderTransfer
-     */
     protected function createOrderWithProductOptions(CartReorderApiTester $I): SaveOrderTransfer
     {
         $itemsData = [

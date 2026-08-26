@@ -1,14 +1,48 @@
-@import '~ShopUi/styles/shared';
+@use 'settings/breakpoint' as setting-breakpoint;
+@use 'settings/color' as setting-color;
+@use 'settings/font' as setting-font;
+@use 'settings/grid' as setting-grid;
+@use 'settings/spacing' as setting-spacing;
+@use 'settings/z-index' as setting-zi;
 
-@import 'helpers/reset';
-@import 'helpers/calc-rem';
-@import 'helpers/font';
-@import 'helpers/input-placeholder';
-@import 'helpers/effect';
+@forward '~ShopUi/styles/shared' hide helper-reset, helper-effect-transition,
+    $setting-color-blue with (
+        $setting-breakpoints: setting-breakpoint.$setting-breakpoints,
+        $setting-color-main: setting-color.$setting-color-main,
+        $setting-color-alt: setting-color.$setting-color-alt,
+        $setting-color-black: setting-color.$setting-color-black,
+        $setting-color-text: setting-color.$setting-color-text,
+        $setting-color-input-border: setting-color.$setting-color-input-border,
+        $setting-color-input-border-focus: setting-color.$setting-color-input-border-focus,
+        $setting-color-actions: setting-color.$setting-color-actions,
+        $setting-font-family: setting-font.$setting-font-family,
+        $setting-font-family-code: setting-font.$setting-font-family-code,
+        $setting-font-size-base: setting-font.$setting-font-size-base,
+        $setting-font-size: setting-font.$setting-font-size,
+        $setting-font-weight: setting-font.$setting-font-weight,
+        $setting-font-line-height: setting-font.$setting-font-line-height,
+        $setting-grid-max-width: setting-grid.$setting-grid-max-width,
+        $setting-spacing: setting-spacing.$setting-spacing,
+        $setting-zi-element: setting-zi.$setting-zi-element,
+        $setting-zi-element-floating: setting-zi.$setting-zi-element-floating,
+        $setting-zi-header: setting-zi.$setting-zi-header,
+        $setting-zi-side-drawer: setting-zi.$setting-zi-side-drawer,
+        $setting-zi-notification-area: setting-zi.$setting-zi-notification-area,
+        $setting-zi-search-suggestions: setting-zi.$setting-zi-search-suggestions
+    );
 
-@import 'settings/breakpoint';
-@import 'settings/color';
-@import 'settings/font';
-@import 'settings/grid';
-@import 'settings/spacing';
-@import 'settings/z-index';
+@forward 'settings/breakpoint' hide $setting-breakpoints;
+@forward 'settings/color' hide $setting-color-main, $setting-color-alt, $setting-color-black, $setting-color-text,
+    $setting-color-input-border, $setting-color-input-border-focus, $setting-color-actions;
+@forward 'settings/font' hide $setting-font-family, $setting-font-family-code, $setting-font-size-base,
+    $setting-font-size, $setting-font-weight, $setting-font-line-height;
+@forward 'settings/grid' hide $setting-grid-max-width;
+@forward 'settings/spacing' hide $setting-spacing;
+@forward 'settings/z-index' hide $setting-zi-element, $setting-zi-element-floating, $setting-zi-header,
+    $setting-zi-side-drawer, $setting-zi-notification-area, $setting-zi-search-suggestions;
+
+@forward 'helpers/reset';
+@forward 'helpers/calc-rem';
+@forward 'helpers/font';
+@forward 'helpers/input-placeholder';
+@forward 'helpers/effect';

@@ -37,24 +37,13 @@ class AvailabilityNotificationsApiFixtures implements FixturesBuilderInterface, 
      */
     protected const TEST_PASSWORD = 'change123';
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\AvailabilityNotifications\AvailabilityNotificationsRestApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(AvailabilityNotificationsRestApiTester $I): FixturesContainerInterface
     {
         $this->customerTransfer = $this->createCustomer($I);
@@ -63,11 +52,6 @@ class AvailabilityNotificationsApiFixtures implements FixturesBuilderInterface, 
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\AvailabilityNotifications\AvailabilityNotificationsRestApiTester $I
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected function createCustomer(AvailabilityNotificationsRestApiTester $I): CustomerTransfer
     {
         return $I->haveCustomer([

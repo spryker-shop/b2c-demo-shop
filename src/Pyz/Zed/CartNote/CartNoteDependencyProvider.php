@@ -15,9 +15,6 @@ use Spryker\Zed\CartNoteProductBundleConnector\Communication\Plugin\BundleProduc
 
 class CartNoteDependencyProvider extends SprykerCartNoteDependencyProvider
 {
-    /**
-     * @return \Spryker\Zed\CartNoteExtension\Dependency\Plugin\QuoteItemFinderPluginInterface
-     */
     protected function getQuoteItemsFinderPlugin(): QuoteItemFinderPluginInterface
     {
         return new BundleProductQuoteItemFinderPlugin();

@@ -20,17 +20,11 @@ use Spryker\Zed\ProductLabel\Persistence\ProductLabelQueryContainerInterface;
  */
 class ExampleProductSalePagePersistenceFactory extends AbstractPersistenceFactory
 {
-    /**
-     * @return \Spryker\Zed\ProductLabel\Persistence\ProductLabelQueryContainerInterface
-     */
     public function getProductLabelQueryContainer(): ProductLabelQueryContainerInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::QUERY_CONTAINER_PRODUCT_LABEL);
     }
 
-    /**
-     * @return \Spryker\Zed\Product\Persistence\ProductQueryContainerInterface
-     */
     public function getProductQueryContainer(): ProductQueryContainerInterface
     {
         return $this->getProvidedDependency(ExampleProductSalePageDependencyProvider::QUERY_CONTAINER_PRODUCT);

@@ -28,11 +28,6 @@ class ProductManagementAttributeWriter extends PublishAwareStep implements DataI
      */
     public const BULK_SIZE = 100;
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $productManagementAttributeEntity = SpyProductManagementAttributeQuery::create()

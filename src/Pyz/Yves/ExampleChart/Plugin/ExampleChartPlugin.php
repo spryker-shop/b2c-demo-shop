@@ -23,9 +23,6 @@ class ExampleChartPlugin extends AbstractPlugin implements ChartPluginInterface,
      */
     public const TEST_CHART = 'testChart';
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return static::TEST_CHART;
@@ -33,8 +30,6 @@ class ExampleChartPlugin extends AbstractPlugin implements ChartPluginInterface,
 
     /**
      * @param string|null $dataIdentifier
-     *
-     * @return \Generated\Shared\Transfer\ChartDataTransfer
      */
     public function getChartData($dataIdentifier = null): ChartDataTransfer // phpcs:ignore
     {
@@ -47,17 +42,11 @@ class ExampleChartPlugin extends AbstractPlugin implements ChartPluginInterface,
         return $data;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ChartLayoutTransfer
-     */
     public function getChartLayout(): ChartLayoutTransfer
     {
         return new ChartLayoutTransfer();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ChartDataTraceTransfer
-     */
     protected function getTrace(): ChartDataTraceTransfer
     {
         $trace = new ChartDataTraceTransfer();

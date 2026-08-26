@@ -49,8 +49,6 @@ class ExampleStateMachineQueryContainer extends AbstractQueryContainer implement
     /**
      * @psalm-suppress TooManyTemplateParams
      *
-     * @param int $idStateMachineItem
-     *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
     public function queryExampleStateMachineItemByIdStateMachineItem(

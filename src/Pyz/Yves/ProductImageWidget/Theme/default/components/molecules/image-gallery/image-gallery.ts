@@ -9,8 +9,6 @@ export default class ImageGallery extends Component {
     protected defaultImageUrl: string;
     protected currentSlideImage: HTMLImageElement;
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.galleryItems = <HTMLElement[]>Array.from(this.getElementsByClassName(`${this.jsName}__item`));
         this.thumbnail = <HTMLElement>this.getElementsByClassName(`${this.jsName}-thumbnail`)[0];

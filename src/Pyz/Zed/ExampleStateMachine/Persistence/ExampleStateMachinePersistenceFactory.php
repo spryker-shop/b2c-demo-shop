@@ -17,9 +17,6 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
  */
 class ExampleStateMachinePersistenceFactory extends AbstractPersistenceFactory
 {
-    /**
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery
-     */
     public function createExampleStateMachineQuery(): ExampleStateMachineItemQuery
     {
         return ExampleStateMachineItemQuery::create();

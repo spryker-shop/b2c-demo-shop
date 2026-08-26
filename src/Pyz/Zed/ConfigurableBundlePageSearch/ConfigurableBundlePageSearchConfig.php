@@ -15,25 +15,16 @@ use Spryker\Zed\ConfigurableBundlePageSearch\ConfigurableBundlePageSearchConfig 
 
 class ConfigurableBundlePageSearchConfig extends SprykerConfigurableBundlePageSearch
 {
-    /**
-     * @return string|null
-     */
     public function getConfigurableBundlePageSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getConfigurableBundlePageEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
 
-    /**
-     * @return string|null
-     */
     public function getConfigurableBundleTemplateImageEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

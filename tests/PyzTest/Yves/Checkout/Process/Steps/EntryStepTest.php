@@ -28,18 +28,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class EntryStepTest extends Unit
 {
-    /**
-     * @return void
-     */
     public function testRequireInputShouldReturnFalse(): void
     {
         $entryStep = $this->createEntryStep();
         $this->assertFalse($entryStep->requireInput(new QuoteTransfer()));
     }
 
-    /**
-     * @return void
-     */
     public function testPostConditionShouldReturnTrue(): void
     {
         $entryStep = $this->createEntryStep();
@@ -47,18 +41,12 @@ class EntryStepTest extends Unit
         $this->assertTrue($entryStep->postCondition(new QuoteTransfer()));
     }
 
-    /**
-     * @return void
-     */
     public function testPreConditionShouldReturnFalseIfCarIsEmpty(): void
     {
         $entryStep = $this->createEntryStep();
         $this->assertFalse($entryStep->preCondition(new QuoteTransfer()));
     }
 
-    /**
-     * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\EntryStep
-     */
     protected function createEntryStep(): EntryStep
     {
         return new EntryStep(
@@ -67,17 +55,11 @@ class EntryStepTest extends Unit
         );
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function createRequest(): Request
     {
         return Request::createFromGlobals();
     }
 
-    /**
-     * @return \Spryker\Client\Customer\CustomerClient
-     */
     protected function createCustomerClient(): CustomerClient
     {
         return new CustomerClient();

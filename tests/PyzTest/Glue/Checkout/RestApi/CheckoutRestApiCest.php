@@ -42,16 +42,8 @@ class CheckoutRestApiCest
      */
     protected const RESPONSE_DETAILS_CART_IS_EMPTY = 'Cart is empty.';
 
-    /**
-     * @var \PyzTest\Glue\Checkout\RestApi\Fixtures\CheckoutRestApiFixtures
-     */
     protected CheckoutRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(CheckoutApiTester $I): void
     {
         /** @var \PyzTest\Glue\Checkout\RestApi\Fixtures\CheckoutRestApiFixtures $fixtures */
@@ -61,10 +53,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithNoItemsInQuote(CheckoutApiTester $I): void
     {
@@ -114,10 +102,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndInvoicePayment(CheckoutApiTester $I): void
     {
@@ -164,10 +148,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndCreditCardPayment(CheckoutApiTester $I): void
     {
@@ -214,10 +194,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndPersistedAddresses(CheckoutApiTester $I): void
     {
@@ -264,10 +240,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithNetPriceModeAndSingleShipment(CheckoutApiTester $I): void
     {
@@ -314,10 +286,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithNetPriceModeAndSplitShipment(CheckoutApiTester $I): void
     {
@@ -365,10 +333,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithGrossPriceModeAndSingleShipment(CheckoutApiTester $I): void
     {
@@ -414,10 +378,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithGrossPriceModeAndSplitShipment(CheckoutApiTester $I): void
     {
@@ -464,10 +424,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithCustomerBillingAddressIdOnly(CheckoutApiTester $I): void
     {
@@ -508,10 +464,6 @@ class CheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestSplitCheckoutWithCustomerShippingAddressIdOnly(CheckoutApiTester $I): void
     {

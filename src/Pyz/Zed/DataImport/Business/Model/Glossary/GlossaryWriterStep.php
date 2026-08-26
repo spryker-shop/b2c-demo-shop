@@ -43,11 +43,6 @@ class GlossaryWriterStep extends PublishAwareStep implements DataImportStepInter
      */
     public const KEY_LOCALE = 'locale';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $glossaryKeyEntity = SpyGlossaryKeyQuery::create()

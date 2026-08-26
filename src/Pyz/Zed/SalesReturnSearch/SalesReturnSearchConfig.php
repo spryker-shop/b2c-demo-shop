@@ -14,9 +14,6 @@ use Spryker\Zed\SalesReturnSearch\SalesReturnSearchConfig as SprykerSalesReturnS
 
 class SalesReturnSearchConfig extends SprykerSalesReturnSearchConfig
 {
-    /**
-     * @return string|null
-     */
     public function getReturnReasonSearchSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;

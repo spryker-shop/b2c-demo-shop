@@ -33,22 +33,12 @@ class NavigationCRUDCest
      */
     public const ELEMENT_TIMEOUT = 5;
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(NavigationGuiPresentationTester $i): void
     {
         $i->amZed();
         $i->amLoggedInUser();
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanCreateReadUpdateAndDeleteNavigation(NavigationGuiPresentationTester $i): void
     {
         $i->amOnPage(NavigationCreatePage::URL);
@@ -67,11 +57,6 @@ class NavigationCRUDCest
         $this->delete($i, $idNavigation);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return int
-     */
     protected function create(NavigationGuiPresentationTester $i): int
     {
         $i->wantTo('Create navigation.');
@@ -86,11 +71,6 @@ class NavigationCRUDCest
         return (int)$i->seeSuccessMessage(NavigationCreatePage::MESSAGE_SUCCESS);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
     protected function read(NavigationGuiPresentationTester $i): void
     {
         $i->wantTo('See navigation list.');
@@ -99,12 +79,6 @@ class NavigationCRUDCest
         $i->waitForElementVisible(NavigationPage::PAGE_LIST_TABLE_XPATH, static::ELEMENT_TIMEOUT);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     * @param int $idNavigation
-     *
-     * @return void
-     */
     protected function update(NavigationGuiPresentationTester $i, int $idNavigation): void
     {
         $i->wantTo('Update existing navigation.');
@@ -118,12 +92,6 @@ class NavigationCRUDCest
         $i->seeSuccessMessage(NavigationUpdatePage::MESSAGE_SUCCESS);
     }
 
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     * @param int $idNavigation
-     *
-     * @return void
-     */
     protected function delete(NavigationGuiPresentationTester $i, int $idNavigation): void
     {
         $i->wantTo('Delete navigation.');

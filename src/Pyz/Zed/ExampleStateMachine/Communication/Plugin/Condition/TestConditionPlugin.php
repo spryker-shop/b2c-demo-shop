@@ -20,11 +20,6 @@ use Spryker\Zed\StateMachine\Dependency\Plugin\ConditionPluginInterface;
  */
 class TestConditionPlugin extends AbstractPlugin implements ConditionPluginInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\StateMachineItemTransfer $stateMachineItemTransfer
-     *
-     * @return bool
-     */
     public function check(StateMachineItemTransfer $stateMachineItemTransfer): bool
     {
         return (bool)($stateMachineItemTransfer->getIdentifier() % 2);

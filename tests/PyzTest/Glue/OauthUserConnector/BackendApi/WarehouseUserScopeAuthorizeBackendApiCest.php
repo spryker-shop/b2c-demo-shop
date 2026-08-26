@@ -27,16 +27,8 @@ use Spryker\Glue\WarehouseUsersBackendApi\WarehouseUsersBackendApiConfig;
  */
 class WarehouseUserScopeAuthorizeBackendApiCest
 {
-    /**
-     * @var \PyzTest\Glue\OauthUserConnector\BackendApi\Fixtures\OauthUserConnectorBackendApiFixtures
-     */
     protected OauthUserConnectorBackendApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(OauthUserConnectorBackendApiTester $I): void
     {
         /** @var \PyzTest\Glue\OauthUserConnector\BackendApi\Fixtures\OauthUserConnectorBackendApiFixtures $fixtures */
@@ -47,10 +39,6 @@ class WarehouseUserScopeAuthorizeBackendApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester $I
-     *
-     * @return void
      */
     public function requestWarehouseUserAssignmentsForWarehouseUserAllowed(OauthUserConnectorBackendApiTester $I): void
     {

@@ -36,76 +36,41 @@ class GuestCheckoutRestApiFixtures implements FixturesBuilderInterface, Fixtures
      */
     protected const ANONYMOUS_PREFIX = 'anonymous:';
 
-    /**
-     * @var string
-     */
     protected string $guestCustomerReference;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $guestCustomerTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected QuoteTransfer $emptyGuestQuoteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ShipmentMethodTransfer
-     */
     protected ShipmentMethodTransfer $shipmentMethodTransfer;
 
-    /**
-     * @return string
-     */
     public function getGuestCustomerReference(): string
     {
         return $this->guestCustomerReference;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getGuestCustomerTransfer(): CustomerTransfer
     {
         return $this->guestCustomerTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function getEmptyGuestQuoteTransfer(): QuoteTransfer
     {
         return $this->emptyGuestQuoteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ShipmentMethodTransfer
-     */
     public function getShipmentMethodTransfer(): ShipmentMethodTransfer
     {
         return $this->shipmentMethodTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(CheckoutApiTester $I): FixturesContainerInterface
     {
         $I->truncateSalesOrderThresholds();

@@ -33,11 +33,6 @@ class AssetCommunicationTester extends Actor
 {
     use _generated\AssetCommunicationTesterActions;
 
-    /**
-     * @param string $assetUuid
-     *
-     * @return \Orm\Zed\Asset\Persistence\SpyAsset|null
-     */
     public function findAssetByUuid(string $assetUuid): ?SpyAsset
     {
         return (new SpyAssetQuery())

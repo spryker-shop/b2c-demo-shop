@@ -25,10 +25,6 @@ abstract class CombinedProductMandatoryColumnCondition implements DataSetConditi
     /**
      * Specification:
      * - Returns true if at least 1 mandatory column contains data.
-     *
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return bool
      */
     final public function hasData(DataSetInterface $dataSet): bool
     {

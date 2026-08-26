@@ -16,11 +16,6 @@ use Generated\Shared\Transfer\StateMachineItemTransfer;
  */
 interface ExampleStateMachineFacadeInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\StateMachineItemTransfer $stateMachineItemTransfer
-     *
-     * @return bool
-     */
     public function updateItemState(StateMachineItemTransfer $stateMachineItemTransfer): bool;
 
     /**
@@ -35,8 +30,5 @@ interface ExampleStateMachineFacadeInterface
      */
     public function getStateMachineItems(): array;
 
-    /**
-     * @return bool
-     */
     public function createExampleItem(): bool;
 }

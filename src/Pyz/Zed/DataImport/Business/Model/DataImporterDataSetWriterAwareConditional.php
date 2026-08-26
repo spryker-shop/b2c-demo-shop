@@ -21,22 +21,11 @@ class DataImporterDataSetWriterAwareConditional extends DataImporterDataSetWrite
      */
     protected $dataSetCondition;
 
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\DataSet\DataSetConditionInterface $dataSetCondition
-     *
-     * @return void
-     */
     public function setDataSetCondition(DataSetConditionInterface $dataSetCondition): void
     {
         $this->dataSetCondition = $dataSetCondition;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Generated\Shared\Transfer\DataImporterReportTransfer $dataImporterReportTransfer
-     *
-     * @return void
-     */
     protected function processDataSet(DataSetInterface $dataSet, DataImporterReportTransfer $dataImporterReportTransfer): void
     {
         if ($this->dataSetCondition->hasData($dataSet)) {

@@ -34,16 +34,8 @@ use Spryker\Shared\PickingList\PickingListConfig;
  */
 class GetCollectionPickingListsBackendJsonApiCest
 {
-    /**
-     * @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\PickingListsBackendJsonApiFixtures
-     */
     protected PickingListsBackendJsonApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(PickingListsBackendApiTester $I): void
     {
         /** @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\PickingListsBackendJsonApiFixtures $fixtures */
@@ -53,10 +45,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionOfPickingListsResources(PickingListsBackendApiTester $I): void
     {
@@ -106,10 +94,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionFilteredByReadyForPickingStatus(PickingListsBackendApiTester $I): void
     {
@@ -148,10 +132,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionFilteredByPickingStartedStatus(PickingListsBackendApiTester $I): void
     {
@@ -190,10 +170,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsRelations(PickingListsBackendApiTester $I): void
     {
@@ -229,10 +205,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsAndSalesOrdersRelations(PickingListsBackendApiTester $I): void
     {
@@ -281,10 +253,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsAndSalesShipmentsRelations(PickingListsBackendApiTester $I): void
     {
@@ -333,10 +301,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsAndConcreteProductsRelations(PickingListsBackendApiTester $I): void
     {
@@ -379,10 +343,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsAndConcreteProductsAndConcreteProductImageSetsRelations(
         PickingListsBackendApiTester $I,
@@ -433,10 +393,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedUsersRelations(PickingListsBackendApiTester $I): void
     {
@@ -466,10 +422,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedWarehouseRelations(PickingListsBackendApiTester $I): void
     {
@@ -499,10 +451,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsEmptyCollectionWhenUserDoNotHaveWarehouseAssignment(PickingListsBackendApiTester $I): void
     {
@@ -532,10 +480,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsEmptyCollectionWhenUserIsNotWarehouseUser(PickingListsBackendApiTester $I): void
     {
@@ -565,10 +509,6 @@ class GetCollectionPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsUnauthorizedErrorResponseWhenAuthTokenIsNotProvided(PickingListsBackendApiTester $I): void
     {

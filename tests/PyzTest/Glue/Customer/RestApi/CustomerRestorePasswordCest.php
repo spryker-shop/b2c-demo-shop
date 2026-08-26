@@ -31,21 +31,10 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CustomerRestorePasswordCest
 {
-    /**
-     * @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures
-     */
     protected CustomerRestApiFixtures $fixtures;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function _before(CustomerApiTester $I): void
     {
         /** @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures $fixtures */
@@ -65,11 +54,6 @@ class CustomerRestorePasswordCest
 
     /**
      * @dataProvider requestPatchCustomerPasswordFailsValidationDataProvider
-     *
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     * @param \Codeception\Example $example
-     *
-     * @return void
      */
     public function requestPatchCustomerPasswordFailsValidation(CustomerApiTester $I, Example $example): void
     {
@@ -110,9 +94,6 @@ class CustomerRestorePasswordCest
         }
     }
 
-    /**
-     * @return array
-     */
     protected function requestPatchCustomerPasswordFailsValidationDataProvider(): array
     {
         return [

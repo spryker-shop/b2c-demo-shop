@@ -24,9 +24,6 @@ class PluginDynamicTypeExtension extends AbstractSprykerDynamicTypeExtension imp
         'getConfig' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractPlugin::class;

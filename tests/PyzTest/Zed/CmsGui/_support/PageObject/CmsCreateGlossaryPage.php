@@ -30,12 +30,6 @@ class CmsCreateGlossaryPage
         ],
     ];
 
-    /**
-     * @param string $placeholder
-     * @param string $locale
-     *
-     * @return string
-     */
     public static function getLocalizedPlaceholderData(string $placeholder, string $locale): string
     {
         return static::$localizedPlaceholders[$placeholder][$locale];

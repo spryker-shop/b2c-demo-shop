@@ -22,9 +22,6 @@ class ZedFactoryDynamicTypeExtension extends AbstractSprykerDynamicTypeExtension
         'getFacade' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractFactory::class;

@@ -15,17 +15,11 @@ use Spryker\Zed\ProductGroupStorage\ProductGroupStorageConfig as SprykerProductG
 
 class ProductGroupStorageConfig extends SprykerProductGroupStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getProductGroupSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

@@ -38,11 +38,6 @@ use Spryker\Zed\UserPasswordResetMail\Communication\Plugin\Mail\UserPasswordRese
 
 class MailDependencyProvider extends SprykerMailDependencyProvider
 {
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
@@ -52,18 +47,13 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function extendMailProviderCollection(Container $container): Container
     {
         $container->extend(self::MAIL_PROVIDER_COLLECTION, function (MailProviderCollectionAddInterface $mailProviderCollection) {
             $mailProviderCollection
-                ->addProvider(new SymfonyMailerProviderPlugin(), [
-                    MailConfig::MAIL_TYPE_ALL,
-                ]);
+            ->addProvider(new SymfonyMailerProviderPlugin(), [
+                MailConfig::MAIL_TYPE_ALL,
+            ]);
 
             return $mailProviderCollection;
         });
@@ -77,27 +67,27 @@ class MailDependencyProvider extends SprykerMailDependencyProvider
     protected function getMailTypeBuilderPlugins(): array
     {
         return [
-            new CustomerRegistrationMailTypeBuilderPlugin(),
-            new CustomerRegistrationConfirmationMailTypeBuilderPlugin(),
-            new CustomerRestorePasswordMailTypeBuilderPlugin(),
-            new CustomerRestoredPasswordConfirmationMailTypeBuilderPlugin(),
-            new NewsletterSubscribedMailTypeBuilderPlugin(),
-            new NewsletterUnsubscribedMailTypeBuilderPlugin(),
-            new OrderConfirmationMailTypeBuilderPlugin(),
-            new OrderShippedMailTypeBuilderPlugin(),
-            new AvailabilityNotificationUnsubscribedMailTypeBuilderPlugin(),
-            new AvailabilityNotificationSubscriptionMailTypeBuilderPlugin(),
-            new AvailabilityNotificationMailTypeBuilderPlugin(),
-            new UserPasswordResetMailTypeBuilderPlugin(),
-            new GiftCardDeliveryMailTypeBuilderPlugin(),
-            new GiftCardUsageMailTypeBuilderPlugin(),
-            new OrderInvoiceMailTypeBuilderPlugin(),
-            new CustomerEmailChangeVerificationMailTypePlugin(),
-            new CustomerEmailChangeNotificationMailTypePlugin(),
-            new CustomerEmailMultiFactorAuthMailTypeBuilderPlugin(),
-            new UserEmailMultiFactorAuthMailTypeBuilderPlugin(),
-            new NotifyOrderAmendmentAppliedMailTypeBuilderPlugin(),
-            new NotifyOrderAmendmentFailedMailTypeBuilderPlugin(),
+        new CustomerRegistrationMailTypeBuilderPlugin(),
+        new CustomerRegistrationConfirmationMailTypeBuilderPlugin(),
+        new CustomerRestorePasswordMailTypeBuilderPlugin(),
+        new CustomerRestoredPasswordConfirmationMailTypeBuilderPlugin(),
+        new NewsletterSubscribedMailTypeBuilderPlugin(),
+        new NewsletterUnsubscribedMailTypeBuilderPlugin(),
+        new OrderConfirmationMailTypeBuilderPlugin(),
+        new OrderShippedMailTypeBuilderPlugin(),
+        new AvailabilityNotificationUnsubscribedMailTypeBuilderPlugin(),
+        new AvailabilityNotificationSubscriptionMailTypeBuilderPlugin(),
+        new AvailabilityNotificationMailTypeBuilderPlugin(),
+        new UserPasswordResetMailTypeBuilderPlugin(),
+        new GiftCardDeliveryMailTypeBuilderPlugin(),
+        new GiftCardUsageMailTypeBuilderPlugin(),
+        new OrderInvoiceMailTypeBuilderPlugin(),
+        new CustomerEmailChangeVerificationMailTypePlugin(),
+        new CustomerEmailChangeNotificationMailTypePlugin(),
+        new CustomerEmailMultiFactorAuthMailTypeBuilderPlugin(),
+        new UserEmailMultiFactorAuthMailTypeBuilderPlugin(),
+        new NotifyOrderAmendmentAppliedMailTypeBuilderPlugin(),
+        new NotifyOrderAmendmentFailedMailTypeBuilderPlugin(),
         ];
     }
 }

@@ -39,55 +39,29 @@ class GuestCartUpSellingProductsRestApiFixtures implements FixturesBuilderInterf
      */
     protected const ANONYMOUS_PREFIX = 'anonymous:';
 
-    /**
-     * @var string
-     */
     protected string $guestCustomerReference;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $upSellingProductConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected QuoteTransfer $guestQuoteTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getUpSellingProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->upSellingProductConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function getGuestQuoteTransfer(): QuoteTransfer
     {
         return $this->guestQuoteTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\UpSellingProducts\UpSellingProductsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(UpSellingProductsApiTester $I): FixturesContainerInterface
     {
         $I->truncateSalesOrderThresholds();
@@ -99,11 +73,6 @@ class GuestCartUpSellingProductsRestApiFixtures implements FixturesBuilderInterf
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\UpSellingProducts\UpSellingProductsApiTester $I
-     *
-     * @return void
-     */
     protected function createGuestQuoteWithProduct(UpSellingProductsApiTester $I): void
     {
         $this->productConcreteTransfer = $I->haveFullProduct();
@@ -114,21 +83,11 @@ class GuestCartUpSellingProductsRestApiFixtures implements FixturesBuilderInterf
         $this->guestQuoteTransfer = $this->createPersistentQuote($I, $customerTransfer, [$this->productConcreteTransfer]);
     }
 
-    /**
-     * @param \PyzTest\Glue\UpSellingProducts\UpSellingProductsApiTester $I
-     *
-     * @return void
-     */
     protected function createUpSellingProduct(UpSellingProductsApiTester $I): void
     {
         $this->upSellingProductConcreteTransfer = $I->haveFullProduct();
     }
 
-    /**
-     * @param \PyzTest\Glue\UpSellingProducts\UpSellingProductsApiTester $I
-     *
-     * @return void
-     */
     protected function createRelationBetweenProducts(UpSellingProductsApiTester $I): void
     {
         $storeTransfer = $I->haveStore([
@@ -155,11 +114,7 @@ class GuestCartUpSellingProductsRestApiFixtures implements FixturesBuilderInterf
     }
 
     /**
-     * @param \PyzTest\Glue\UpSellingProducts\UpSellingProductsApiTester $I
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
      * @param array<\Generated\Shared\Transfer\ProductConcreteTransfer> $productConcreteTransfers
-     *
-     * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     protected function createPersistentQuote(
         UpSellingProductsApiTester $I,
@@ -178,8 +133,6 @@ class GuestCartUpSellingProductsRestApiFixtures implements FixturesBuilderInterf
 
     /**
      * @param array<\Generated\Shared\Transfer\ProductConcreteTransfer> $productConcreteTransfers
-     *
-     * @return array
      */
     protected function mapProductConcreteTransfersToQuoteTransferItems(array $productConcreteTransfers): array
     {

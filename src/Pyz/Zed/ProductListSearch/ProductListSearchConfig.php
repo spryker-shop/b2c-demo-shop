@@ -14,9 +14,6 @@ use Spryker\Zed\ProductListSearch\ProductListSearchConfig as SprykerProductListS
 
 class ProductListSearchConfig extends SprykerProductListSearchConfig
 {
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

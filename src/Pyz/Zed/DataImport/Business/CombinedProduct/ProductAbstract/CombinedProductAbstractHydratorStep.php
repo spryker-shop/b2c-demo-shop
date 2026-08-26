@@ -114,11 +114,6 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
         self::ASSIGNABLE_PRODUCT_TYPE_BOTH,
     ];
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $this->assertAssignableProductTypeColumn($dataSet);
@@ -127,12 +122,8 @@ class CombinedProductAbstractHydratorStep extends ProductAbstractHydratorStep
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException
      * @throws \Pyz\Zed\DataImport\Business\Exception\InvalidDataException
-     *
-     * @return void
      */
     protected function assertAssignableProductTypeColumn(DataSetInterface $dataSet): void
     {

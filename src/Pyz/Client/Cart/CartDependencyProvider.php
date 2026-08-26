@@ -22,9 +22,6 @@ use Spryker\Client\ProductConfigurationCart\Plugin\Cart\ProductConfigurationCart
 
 class CartDependencyProvider extends SprykerCartDependencyProvider
 {
-    /**
-     * @return \Spryker\Client\Cart\Dependency\Plugin\ItemCountPluginInterface
-     */
     protected function getItemCountPlugin(): ItemCountPluginInterface
     {
         return new ProductBundleItemCountQuantityPlugin();
@@ -41,9 +38,6 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
         return $quoteStorageStrategyPlugins;
     }
 
-    /**
-     * @return \Spryker\Client\CartExtension\Dependency\Plugin\QuoteItemFinderPluginInterface
-     */
     protected function getQuoteItemFinderPlugin(): QuoteItemFinderPluginInterface
     {
         return new BundleProductQuoteItemFinderPlugin();
@@ -55,9 +49,9 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
     protected function getAddItemsRequestExpanderPlugins(): array
     {
         return [
-            new AddDiscountPromotionCartRequestExpandPlugin(),
-            new ProductSeparateCartChangeExpanderPlugin(),
-            new ProductConfigurationCartChangeRequestExpanderPlugin(),
+        new AddDiscountPromotionCartRequestExpandPlugin(),
+        new ProductSeparateCartChangeExpanderPlugin(),
+        new ProductConfigurationCartChangeRequestExpanderPlugin(),
         ];
     }
 
@@ -67,7 +61,7 @@ class CartDependencyProvider extends SprykerCartDependencyProvider
     protected function getRemoveItemsRequestExpanderPlugins(): array
     {
         return [
-            new RemoveBundleChangeRequestExpanderPlugin(),
+        new RemoveBundleChangeRequestExpanderPlugin(),
         ];
     }
 }

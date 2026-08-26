@@ -45,11 +45,6 @@ class PaymentStepTest extends Unit
 
     /**
      * @dataProvider executeDataProvider
-     *
-     * @param \SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep $paymentStep
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
      */
     public function testExecuteShouldSelectPlugin(PaymentStep $paymentStep, QuoteTransfer $quoteTransfer): void
     {
@@ -58,11 +53,6 @@ class PaymentStepTest extends Unit
 
     /**
      * @dataProvider postConditionsDataProvider
-     *
-     * @param \SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep $paymentStep
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
      */
     public function testPostConditionsShouldReturnTrueWhenPaymentSet(
         PaymentStep $paymentStep,
@@ -77,11 +67,6 @@ class PaymentStepTest extends Unit
 
     /**
      * @dataProvider shipmentDataProvider
-     *
-     * @param \SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep $paymentStep
-     * @param \Generated\Shared\Transfer\QuoteTransfer $quoteTransfer
-     *
-     * @return void
      */
     public function testShipmentRequireInputShouldReturnTrue(
         PaymentStep $paymentStep,
@@ -94,9 +79,6 @@ class PaymentStepTest extends Unit
         $this->assertTrue($isInputRequired);
     }
 
-    /**
-     * @return array
-     */
     public function executeDataProvider(): array
     {
         return [
@@ -104,9 +86,6 @@ class PaymentStepTest extends Unit
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function addDataForExecuteDataProvider(): array
     {
         $paymentPluginMock = $this->createPaymentPluginMock();
@@ -124,9 +103,6 @@ class PaymentStepTest extends Unit
         return [$paymentStep, $quoteTransfer];
     }
 
-    /**
-     * @return array
-     */
     public function postConditionsDataProvider(): array
     {
         return [
@@ -134,9 +110,6 @@ class PaymentStepTest extends Unit
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function addDataForPostConditionsDataProvider(): array
     {
         $paymentStep = $this->createPaymentStep(new StepHandlerPluginCollection());
@@ -151,9 +124,6 @@ class PaymentStepTest extends Unit
         return [$paymentStep, $quoteTransfer];
     }
 
-    /**
-     * @return array
-     */
     public function shipmentDataProvider(): array
     {
         return [
@@ -161,9 +131,6 @@ class PaymentStepTest extends Unit
         ];
     }
 
-    /**
-     * @return array
-     */
     protected function addDataForShipmentDataProvider(): array
     {
         $paymentStep = $this->createPaymentStep(new StepHandlerPluginCollection());
@@ -173,11 +140,6 @@ class PaymentStepTest extends Unit
         return [$paymentStep, $quoteTransfer];
     }
 
-    /**
-     * @param \Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection $paymentPlugins
-     *
-     * @return \SprykerShop\Yves\CheckoutPage\Process\Steps\PaymentStep
-     */
     protected function createPaymentStep(StepHandlerPluginCollection $paymentPlugins): PaymentStep
     {
         return new PaymentStep(
@@ -215,9 +177,6 @@ class PaymentStepTest extends Unit
         return $paymentClientMock;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     protected function createRequest(): Request
     {
         return Request::createFromGlobals();

@@ -32,11 +32,6 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
         $this->defaultAttributes = $defaultAttributes;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $keysToUnset = [];
@@ -84,17 +79,11 @@ class ProductLocalizedAttributesExtractorStep implements DataImportStepInterface
         $dataSet[static::KEY_LOCALIZED_ATTRIBUTES] = $localizedAttributes;
     }
 
-    /**
-     * @return string
-     */
     protected function getAttributeKeyPrefix(): string
     {
         return 'attribute_key_';
     }
 
-    /**
-     * @return string
-     */
     protected function getAttributeValuePrefix(): string
     {
         return 'value_';

@@ -31,11 +31,6 @@ class CheckoutAvailabilityCest
 {
     /**
      * @skip Require P&S functionality
-     *
-     * @param \PyzTest\Yves\Availability\AvailabilityPresentationTester $i
-     * @param \Codeception\Scenario $scenario
-     *
-     * @return void
      */
     public function testCheckoutItemWithAvailability(AvailabilityPresentationTester $i, Scenario $scenario): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {

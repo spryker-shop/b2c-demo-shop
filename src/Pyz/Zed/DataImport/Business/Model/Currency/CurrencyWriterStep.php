@@ -30,11 +30,6 @@ class CurrencyWriterStep implements DataImportStepInterface
      */
     public const KEY_NAME = 'name';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $currencyEntity = SpyCurrencyQuery::create()

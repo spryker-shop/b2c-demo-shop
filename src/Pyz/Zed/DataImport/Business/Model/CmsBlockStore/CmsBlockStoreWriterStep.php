@@ -45,11 +45,6 @@ class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStep
      */
     protected static $idStoreBuffer = [];
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $idCmsBlock = $this->getIdCmsBlockByKey($dataSet[static::KEY_BLOCK_KEY]);
@@ -64,11 +59,7 @@ class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStep
     }
 
     /**
-     * @param string $cmsBlockKey
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\EntityNotFoundException
-     *
-     * @return int
      */
     protected function getIdCmsBlockByKey(string $cmsBlockKey): int
     {
@@ -88,11 +79,7 @@ class CmsBlockStoreWriterStep extends PublishAwareStep implements DataImportStep
     }
 
     /**
-     * @param string $storeName
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\EntityNotFoundException
-     *
-     * @return int
      */
     protected function getIdStoreByName(string $storeName): int
     {

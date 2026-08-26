@@ -40,50 +40,27 @@ class WishlistsRestApiFixtures implements FixturesBuilderInterface, FixturesCont
      */
     protected const TEST_PASSWORD = 'change123';
 
-    /**
-     * @var \Generated\Shared\Transfer\WishlistTransfer
-     */
     protected WishlistTransfer $wishlistTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\WishlistTransfer
-     */
     public function getWishlistTransfer(): WishlistTransfer
     {
         return $this->wishlistTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(WishlistsApiTester $I): FixturesContainerInterface
     {
         $this->createWishlist($I);
@@ -91,11 +68,6 @@ class WishlistsRestApiFixtures implements FixturesBuilderInterface, FixturesCont
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\Wishlists\WishlistsApiTester $I
-     *
-     * @return void
-     */
     protected function createWishlist(WishlistsApiTester $I): void
     {
         $this->productConcreteTransfer = $I->haveFullProduct();

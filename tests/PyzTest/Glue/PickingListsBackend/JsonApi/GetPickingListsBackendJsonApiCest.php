@@ -34,16 +34,8 @@ use Spryker\Glue\WarehousesBackendApi\WarehousesBackendApiConfig;
  */
 class GetPickingListsBackendJsonApiCest
 {
-    /**
-     * @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\PickingListsBackendJsonApiFixtures
-     */
     protected PickingListsBackendJsonApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(PickingListsBackendApiTester $I): void
     {
         /** @var \PyzTest\Glue\PickingListsBackend\JsonApi\Fixtures\PickingListsBackendJsonApiFixtures $fixtures */
@@ -53,10 +45,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCorrectPickingListsResourceByUuid(PickingListsBackendApiTester $I): void
     {
@@ -91,10 +79,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsIncludedPickingListItemsRelations(PickingListsBackendApiTester $I): void
     {
@@ -126,10 +110,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsIncludedPickingListItemsAndSalesOrdersRelations(PickingListsBackendApiTester $I): void
     {
@@ -166,10 +146,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsAndSalesShipmentsRelations(PickingListsBackendApiTester $I): void
     {
@@ -206,10 +182,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsAndConcreteProductsRelations(PickingListsBackendApiTester $I): void
     {
@@ -246,10 +218,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedPickingListItemsAndConcreteProductsAndConcreteProductImageSetsRelations(
         PickingListsBackendApiTester $I,
@@ -294,10 +262,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedUsersRelations(PickingListsBackendApiTester $I): void
     {
@@ -327,10 +291,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsCollectionWithIncludedWarehouseRelations(PickingListsBackendApiTester $I): void
     {
@@ -360,10 +320,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsNotFoundErrorWhenUserDoNotHaveWarehouseAssignment(PickingListsBackendApiTester $I): void
     {
@@ -388,10 +344,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsNotFoundErrorWhenUserIsNotWarehouseUser(PickingListsBackendApiTester $I): void
     {
@@ -416,10 +368,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsNotFoundErrorWhenNonExistingPickingListUuidIsProvided(PickingListsBackendApiTester $I): void
     {
@@ -444,10 +392,6 @@ class GetPickingListsBackendJsonApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
      */
     public function requestReturnsUnauthorizedErrorResponseWhenAuthTokenIsNotProvided(PickingListsBackendApiTester $I): void
     {

@@ -1,11 +1,11 @@
-@import '../configured-bundle/configured-bundle';
+@use 'sass:map';
 
 @mixin configurable-bundle-widget-configured-bundle-secondary($name: '.configured-bundle-secondary') {
     @include configurable-bundle-widget-configured-bundle($name) {
         margin-right: 0;
 
         &__title {
-            font-size: map-get($setting-font-size, big);
+            font-size: map.get($setting-font-size, big);
         }
 
         &__bundle-total {

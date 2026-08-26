@@ -14,9 +14,6 @@ use Spryker\Zed\AvailabilityStorage\AvailabilityStorageConfig as SprykerAvailabi
 
 class AvailabilityStorageConfig extends SprykerAvailabilityStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return SprykerSharedAvailabilityStorageConfig::PUBLISH_AVAILABILITY;

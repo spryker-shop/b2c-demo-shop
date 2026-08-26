@@ -46,11 +46,6 @@ class CartTwigPlugin extends SprykerCartTwigPlugin
         return $twig;
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Twig\Environment
-     */
     protected function addQuoteFunction(Environment $twig): Environment
     {
         $quoteFunction = new TwigFunction(static::FUNCTION_NAME_GET_QUOTE, function () {
@@ -64,11 +59,6 @@ class CartTwigPlugin extends SprykerCartTwigPlugin
         return $twig;
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Twig\Environment
-     */
     protected function addCartItemsFunction(Environment $twig): Environment
     {
         $quoteFunction = new TwigFunction(static::FUNCTION_NAME_GET_CART_ITEMS, function () {

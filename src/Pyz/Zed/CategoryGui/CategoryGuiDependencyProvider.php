@@ -23,9 +23,6 @@ use Spryker\Zed\StoreGui\Communication\Plugin\Form\StoreRelationDropdownFormType
  */
 class CategoryGuiDependencyProvider extends SpykerCategoryGuiDependencyProvider
 {
-    /**
-     * @return \Spryker\Zed\Kernel\Communication\Form\FormTypeInterface
-     */
     protected function getStoreRelationFormTypePlugin(): FormTypeInterface
     {
         return new StoreRelationDropdownFormTypePlugin();
@@ -37,7 +34,7 @@ class CategoryGuiDependencyProvider extends SpykerCategoryGuiDependencyProvider
     protected function getCategoryFormTabExpanderPlugins(): array
     {
         return [
-            new ImageSetCategoryFormTabExpanderPlugin(),
+        new ImageSetCategoryFormTabExpanderPlugin(),
         ];
     }
 
@@ -47,8 +44,8 @@ class CategoryGuiDependencyProvider extends SpykerCategoryGuiDependencyProvider
     protected function getCategoryFormPlugins(): array
     {
         return [
-            new ImageSetSubformCategoryFormPlugin(),
-            new CmsBlockSubformCategoryFormPlugin(),
+        new ImageSetSubformCategoryFormPlugin(),
+        new CmsBlockSubformCategoryFormPlugin(),
         ];
     }
 
@@ -58,8 +55,8 @@ class CategoryGuiDependencyProvider extends SpykerCategoryGuiDependencyProvider
     protected function getCategoryRelationReadPlugins(): array
     {
         return [
-            new ProductCategoryRelationReadPlugin(),
-            new CmsBlockCategoryRelationReadPlugin(),
+        new ProductCategoryRelationReadPlugin(),
+        new CmsBlockCategoryRelationReadPlugin(),
         ];
     }
 }

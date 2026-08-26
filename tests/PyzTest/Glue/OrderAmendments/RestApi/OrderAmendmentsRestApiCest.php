@@ -48,16 +48,8 @@ class OrderAmendmentsRestApiCest
      */
     protected const RESPONSE_DETAIL_PARAMETER_IS_AMENDABLE_INVALID = 'isAmendment => This value should be of type bool.';
 
-    /**
-     * @var \PyzTest\Glue\OrderAmendments\RestApi\Fixtures\OrderAmendmentRestApiFixtures
-     */
     protected OrderAmendmentRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(OrderAmendmentsApiTester $I): void
     {
         /** @var \PyzTest\Glue\OrderAmendments\RestApi\Fixtures\OrderAmendmentRestApiFixtures $fixtures */
@@ -65,11 +57,6 @@ class OrderAmendmentsRestApiCest
         $this->fixtures = $fixtures;
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     public function requestCreateOrderAmendmentWithInvalidOrder(OrderAmendmentsApiTester $I): void
     {
         //Arrange
@@ -99,11 +86,6 @@ class OrderAmendmentsRestApiCest
         $I->assertEquals($errors[RestCheckoutErrorTransfer::DETAIL], static::RESPONSE_DETAIL_ORDER_IS_NOT_AMENDABLE);
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     public function requestCreateOrderAmendmentWithEmptyIsAmendmentParameter(OrderAmendmentsApiTester $I): void
     {
         //Arrange
@@ -133,11 +115,6 @@ class OrderAmendmentsRestApiCest
         $I->assertEquals($errors[RestCheckoutErrorTransfer::DETAIL], static::RESPONSE_DETAIL_PARAMETER_IS_AMENDABLE_INVALID);
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     public function requestCreateOrderAmendmentWithValidOrder(OrderAmendmentsApiTester $I): void
     {
         //Arrange

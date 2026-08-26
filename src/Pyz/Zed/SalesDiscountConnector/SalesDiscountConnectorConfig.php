@@ -13,9 +13,6 @@ use Spryker\Zed\SalesDiscountConnector\SalesDiscountConnectorConfig as SprykerSa
 
 class SalesDiscountConnectorConfig extends SprykerSalesDiscountConnectorConfig
 {
-    /**
-     * @return bool
-     */
     public function isCurrentOrderExcludedFromCount(): bool
     {
         return true;

@@ -15,8 +15,6 @@ class ZedNavigationConfig extends SprykerZedNavigationConfig
 {
     /**
      * @api
-     *
-     * @return string
      */
     public function getMergeStrategy(): string
     {

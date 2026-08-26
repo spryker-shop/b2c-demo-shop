@@ -77,17 +77,11 @@ class ProductConfig extends SprykerProductConfig
         ]);
     }
 
-    /**
-     * @return bool
-     */
     public function isFullLocaleNamesInUrlEnabled(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
     public function isRememberMeEnabled(): bool
     {
         return false;

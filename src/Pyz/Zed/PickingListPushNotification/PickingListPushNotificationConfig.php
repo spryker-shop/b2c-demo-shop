@@ -20,9 +20,6 @@ class PickingListPushNotificationConfig extends SprykerPickingListPushNotificati
      */
     protected const PUSH_NOTIFICATION_PROVIDER_NAME = 'web-push-php';
 
-    /**
-     * @return string
-     */
     public function getPushNotificationProviderName(): string
     {
         return static::PUSH_NOTIFICATION_PROVIDER_NAME;

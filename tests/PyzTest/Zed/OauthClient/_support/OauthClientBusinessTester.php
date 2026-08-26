@@ -43,8 +43,6 @@ class OauthClientBusinessTester extends Actor
 
     /**
      * @param array<\Spryker\Zed\OauthClientExtension\Dependency\Plugin\OauthAccessTokenProviderPluginInterface> $pluginStack
-     *
-     * @return void
      */
     public function setOauthAccessTokenProviderPluginsDependency(array $pluginStack): void
     {

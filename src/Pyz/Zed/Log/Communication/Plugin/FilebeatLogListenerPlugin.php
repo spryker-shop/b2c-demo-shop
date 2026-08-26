@@ -20,18 +20,12 @@ use Symfony\Component\Process\Process;
  */
 class FilebeatLogListenerPlugin extends AbstractPlugin implements LogListenerInterface
 {
-    /**
-     * @return void
-     */
     public function startListener(): void
     {
         $process = new Process(['sudo service filebeat start']);
         $process->run();
     }
 
-    /**
-     * @return void
-     */
     public function stopListener(): void
     {
         $process = new Process(['sudo service filebeat stop']);

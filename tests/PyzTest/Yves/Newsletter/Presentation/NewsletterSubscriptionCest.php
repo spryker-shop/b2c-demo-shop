@@ -28,21 +28,11 @@ use PyzTest\Yves\Newsletter\PageObject\NewsletterSubscriptionHomePage;
  */
 class NewsletterSubscriptionCest
 {
-    /**
-     * @param \PyzTest\Yves\Newsletter\NewsletterPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(NewsletterPresentationTester $i): void
     {
         $i->amYves();
     }
 
-    /**
-     * @param \PyzTest\Yves\Newsletter\NewsletterPresentationTester $i
-     *
-     * @return void
-     */
     public function iCanSubscribeWithAnUnsubscribedEmail(NewsletterPresentationTester $i): void
     {
         $i->wantTo('Subscribe to the newsletter with an unsubscribed new email.');
@@ -58,11 +48,6 @@ class NewsletterSubscriptionCest
         $i->see(NewsletterSubscriptionHomePage::SUCCESS_MESSAGE);
     }
 
-    /**
-     * @param \PyzTest\Yves\Newsletter\NewsletterPresentationTester $i
-     *
-     * @return void
-     */
     public function iCanNotSubscribeWithAnAlreadySubscribedEmail(NewsletterPresentationTester $i): void
     {
         $i->wantTo('Subscribe to the newsletter with an already subscribed email.');
@@ -80,11 +65,6 @@ class NewsletterSubscriptionCest
         $i->see(NewsletterSubscriptionHomePage::ERROR_MESSAGE);
     }
 
-    /**
-     * @param \PyzTest\Yves\Newsletter\NewsletterPresentationTester $i
-     *
-     * @return void
-     */
     public function subscribedEmailIsLinkedWithCustomerAfterRegistration(NewsletterPresentationTester $i): void
     {
         $i->wantTo('Subscribe to the newsletter with an unsubscribed email and later on register with that address.');
@@ -103,11 +83,6 @@ class NewsletterSubscriptionCest
         $i->see(CustomerOverviewPage::NEWSLETTER_SUBSCRIBED);
     }
 
-    /**
-     * @param \PyzTest\Yves\Newsletter\NewsletterPresentationTester $i
-     *
-     * @return void
-     */
     public function subscribedEmailCanBeUnsubscribedByCustomerAfterRegistration(NewsletterPresentationTester $i): void
     {
         $i->wantTo('Subscribe to the newsletter with an unsubscribed email should be able to unsubscribe after registration.');

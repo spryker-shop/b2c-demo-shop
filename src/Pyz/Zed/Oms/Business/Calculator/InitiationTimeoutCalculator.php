@@ -16,11 +16,6 @@ use Generated\Shared\Transfer\TimeoutProcessorTimeoutResponseTransfer;
 
 class InitiationTimeoutCalculator implements TimeoutProcessorTimeoutCalculatorInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\TimeoutProcessorTimeoutResponseTransfer
-     */
     public function calculateTimeout(TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer): TimeoutProcessorTimeoutResponseTransfer
     {
         $omsEventTransfer = $timeoutProcessorTimeoutRequestTransfer->getOmsEvent();

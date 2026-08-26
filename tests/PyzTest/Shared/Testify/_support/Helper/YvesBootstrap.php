@@ -22,9 +22,6 @@ class YvesBootstrap extends Framework
      */
     private $yvesBootstrap;
 
-    /**
-     * @return void
-     */
     public function _initialize(): void
     {
         $this->loadApplication();
@@ -32,8 +29,6 @@ class YvesBootstrap extends Framework
 
     /**
      * @param array $settings
-     *
-     * @return void
      */
     public function _beforeSuite($settings = []): void // phpcs:ignore
     {
@@ -42,8 +37,6 @@ class YvesBootstrap extends Framework
 
     /**
      * @throws \Codeception\Exception\ModuleConfigException
-     *
-     * @return void
      */
     protected function loadApplication(): void
     {

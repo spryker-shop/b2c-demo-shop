@@ -21,9 +21,6 @@ class ConfigDynamicTypeExtension extends AbstractSprykerDynamicTypeExtension imp
         'getSharedConfig' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractBundleConfig::class;

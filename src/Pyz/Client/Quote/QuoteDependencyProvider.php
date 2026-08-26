@@ -19,8 +19,6 @@ use Spryker\Client\Store\Plugin\StoreQuoteTransferExpanderPlugin;
 class QuoteDependencyProvider extends SprykerQuoteDependencyProvider
 {
     /**
-     * @param \Spryker\Client\Kernel\Container $container
-     *
      * @return array<\Spryker\Client\QuoteExtension\Dependency\Plugin\QuoteTransferExpanderPluginInterface>
      */
     protected function getQuoteTransferExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter

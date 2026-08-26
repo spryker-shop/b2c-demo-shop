@@ -32,14 +32,8 @@ use Spryker\Zed\Product\ProductDependencyProvider;
  */
 class InitializeProductExportMessageTest extends Unit
 {
-    /**
-     * @var \PyzTest\Zed\MessageBroker\ProductCommunicationTester
-     */
     protected ProductCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     public function testInitializeProductExportMessageIsSuccessfullyHandled(): void
     {
         // Arrange

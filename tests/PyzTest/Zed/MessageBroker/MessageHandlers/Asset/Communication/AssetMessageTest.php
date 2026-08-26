@@ -30,14 +30,8 @@ use Ramsey\Uuid\Uuid;
  */
 class AssetMessageTest extends Unit
 {
-    /**
-     * @var \PyzTest\Zed\MessageBroker\AssetCommunicationTester
-     */
     protected AssetCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     public function testAssetAddedMessageIsSuccessfullyHandled(): void
     {
         // Arrange
@@ -63,9 +57,6 @@ class AssetMessageTest extends Unit
         $this->tester->assertSame($slotName, $asset->getAssetSlot());
     }
 
-    /**
-     * @return void
-     */
     public function testAssetUpdatedMessageIsSuccessfullyHandled(): void
     {
         // Arrange
@@ -102,9 +93,6 @@ class AssetMessageTest extends Unit
         $this->tester->assertSame($slotName, $asset->getAssetSlot());
     }
 
-    /**
-     * @return void
-     */
     public function testAssetDeletedMessageIsSuccessfullyHandled(): void
     {
         // Arrange

@@ -33,8 +33,6 @@ interface ExampleStateMachineQueryContainerInterface
     /**
      * @psalm-suppress TooManyTemplateParams
      *
-     * @param int $idStateMachineItem
-     *
      * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
     public function queryExampleStateMachineItemByIdStateMachineItem(

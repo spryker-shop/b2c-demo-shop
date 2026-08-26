@@ -37,8 +37,6 @@ class UpSellingProductsApiTester extends ApiEndToEndTester
 
     /**
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function formatQueryInclude(array $includes = []): string
     {
@@ -50,10 +48,7 @@ class UpSellingProductsApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @param string $cartUuid
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function buildCartUpSellingProductsUrl(string $cartUuid, array $includes = []): string
     {
@@ -68,10 +63,7 @@ class UpSellingProductsApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @param string $cartUuid
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function buildGuestCartUpSellingProductsUrl(string $cartUuid, array $includes = []): string
     {
@@ -86,10 +78,7 @@ class UpSellingProductsApiTester extends ApiEndToEndTester
     }
 
     /**
-     * @param string $productAbstractSku
      * @param array<string> $includes
-     *
-     * @return string
      */
     public function buildProductAbstractUrl(string $productAbstractSku, array $includes = []): string
     {

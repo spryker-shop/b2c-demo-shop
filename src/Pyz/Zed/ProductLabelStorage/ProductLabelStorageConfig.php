@@ -15,33 +15,21 @@ use Spryker\Zed\ProductLabelStorage\ProductLabelStorageConfig as SprykerProductL
 
 class ProductLabelStorageConfig extends SprykerProductLabelStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getProductAbstractLabelSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProductLabelDictionarySynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProductAbstractLabelEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProductLabelDictionaryEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

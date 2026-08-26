@@ -72,63 +72,34 @@ class PriceProductOrderAmendmentRestApiFixtures implements FixturesBuilderInterf
      */
     protected const PRICE_MODE_GROSS = 'GROSS_MODE';
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\SaveOrderTransfer
-     */
     protected SaveOrderTransfer $readyForAmendmentOrderTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productWithBiggerPrice;
 
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productWithLowerPrice;
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\SaveOrderTransfer
-     */
     public function getReadyForAmendmentOrderTransfer(): SaveOrderTransfer
     {
         return $this->readyForAmendmentOrderTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductWithBiggerPrice(): ProductConcreteTransfer
     {
         return $this->productWithBiggerPrice;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductWithLowerPrice(): ProductConcreteTransfer
     {
         return $this->productWithLowerPrice;
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(OrderAmendmentsApiTester $I): FixturesContainerInterface
     {
         $this->configureStateMachine($I);
@@ -159,11 +130,6 @@ class PriceProductOrderAmendmentRestApiFixtures implements FixturesBuilderInterf
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected function createCustomerTransfer(OrderAmendmentsApiTester $I): CustomerTransfer
     {
         $customerTransfer = $I->haveCustomer([
@@ -175,11 +141,6 @@ class PriceProductOrderAmendmentRestApiFixtures implements FixturesBuilderInterf
         return $I->confirmCustomer($customerTransfer);
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return \Generated\Shared\Transfer\SaveOrderTransfer
-     */
     protected function createOrderWithProductConcretes(OrderAmendmentsApiTester $I): SaveOrderTransfer
     {
         $quoteTransfer = (new QuoteBuilder())
@@ -209,11 +170,7 @@ class PriceProductOrderAmendmentRestApiFixtures implements FixturesBuilderInterf
     }
 
     /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
      * @param \ArrayObject<array-key, \Generated\Shared\Transfer\ItemTransfer> $itemTransfers
-     * @param string $stateName
-     *
-     * @return void
      */
     protected function setOrderItemsState(OrderAmendmentsApiTester $I, ArrayObject $itemTransfers, string $stateName): void
     {
@@ -222,11 +179,6 @@ class PriceProductOrderAmendmentRestApiFixtures implements FixturesBuilderInterf
         }
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     protected function configureStateMachine(OrderAmendmentsApiTester $I): void
     {
         $I->configureTestStateMachine([static::STATE_MACHINE_NAME]);

@@ -74,8 +74,6 @@ class ProductRelationPresentationTester extends Actor
     protected $numberOfRulesSelected = 0;
 
     /**
-     * @param string $type
-     *
      * @return $this
      */
     public function selectRelationType(string $type)
@@ -87,8 +85,6 @@ class ProductRelationPresentationTester extends Actor
     }
 
     /**
-     * @param string $name
-     *
      * @return $this
      */
     public function filterProductsByName(string $name)
@@ -100,8 +96,6 @@ class ProductRelationPresentationTester extends Actor
     }
 
     /**
-     * @param string $sku
-     *
      * @return $this
      */
     public function selectProduct(string $sku)
@@ -129,10 +123,6 @@ class ProductRelationPresentationTester extends Actor
     }
 
     /**
-     * @param string $ruleName
-     * @param string $operator
-     * @param string $value
-     *
      * @return $this
      */
     public function selectProductRule(string $ruleName, string $operator, string $value)
@@ -176,11 +166,6 @@ class ProductRelationPresentationTester extends Actor
         return $this;
     }
 
-    /**
-     * @param string $productRelationKey
-     *
-     * @return void
-     */
     public function cleanUpProductRelation(string $productRelationKey): void
     {
         $productRelationEntity = $this->findProductRelationByProductRelationKey($productRelationKey);
@@ -192,11 +177,6 @@ class ProductRelationPresentationTester extends Actor
         $productRelationEntity->delete();
     }
 
-    /**
-     * @param string $productRelationKey
-     *
-     * @return \Orm\Zed\ProductRelation\Persistence\SpyProductRelation|null
-     */
     protected function findProductRelationByProductRelationKey(string $productRelationKey): ?SpyProductRelation
     {
         return SpyProductRelationQuery::create()->findOneByProductRelationKey($productRelationKey);

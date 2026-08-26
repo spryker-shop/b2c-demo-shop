@@ -51,14 +51,8 @@ class CheckoutRestApiFixtures implements FixturesBuilderInterface, FixturesConta
      */
     protected const PRODUCT_CONCRETES_GENERATE_NUMBER = 100;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\CustomerTransfer
-     */
     protected CustomerTransfer $customerTransferWithPersistedAddress;
 
     /**
@@ -66,32 +60,17 @@ class CheckoutRestApiFixtures implements FixturesBuilderInterface, FixturesConta
      */
     protected array $productConcreteTransfers;
 
-    /**
-     * @var \Generated\Shared\Transfer\QuoteTransfer
-     */
     protected QuoteTransfer $emptyQuoteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\ShipmentMethodTransfer
-     */
     protected ShipmentMethodTransfer $shipmentMethodTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\AddressTransfer
-     */
     protected AddressTransfer $customerAddress;
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransfer(): CustomerTransfer
     {
         return $this->customerTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function getCustomerTransferWithPersistedAddress(): CustomerTransfer
     {
         return $this->customerTransferWithPersistedAddress;
@@ -105,35 +84,21 @@ class CheckoutRestApiFixtures implements FixturesBuilderInterface, FixturesConta
         return $this->productConcreteTransfers;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\QuoteTransfer
-     */
     public function getEmptyQuoteTransfer(): QuoteTransfer
     {
         return $this->emptyQuoteTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ShipmentMethodTransfer
-     */
     public function getShipmentMethodTransfer(): ShipmentMethodTransfer
     {
         return $this->shipmentMethodTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\AddressTransfer
-     */
     public function getCustomerAddress(): AddressTransfer
     {
         return $this->customerAddress;
     }
 
-    /**
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(CheckoutApiTester $I): FixturesContainerInterface
     {
         $I->truncateSalesOrderThresholds();

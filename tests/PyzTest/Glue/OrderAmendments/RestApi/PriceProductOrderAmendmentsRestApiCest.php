@@ -26,16 +26,8 @@ use Spryker\Glue\CartReorderRestApi\CartReorderRestApiConfig;
  */
 class PriceProductOrderAmendmentsRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\OrderAmendments\RestApi\Fixtures\PriceProductOrderAmendmentRestApiFixtures
-     */
     protected PriceProductOrderAmendmentRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(OrderAmendmentsApiTester $I): void
     {
         /** @var \PyzTest\Glue\OrderAmendments\RestApi\Fixtures\PriceProductOrderAmendmentRestApiFixtures $fixtures */
@@ -43,11 +35,6 @@ class PriceProductOrderAmendmentsRestApiCest
         $this->fixtures = $fixtures;
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     public function requestCreateOrderAmendmentWithPricesSavedFromTheOrder(OrderAmendmentsApiTester $I): void
     {
         // Arrange
@@ -80,11 +67,6 @@ class PriceProductOrderAmendmentsRestApiCest
         );
     }
 
-    /**
-     * @param \PyzTest\Glue\OrderAmendments\OrderAmendmentsApiTester $I
-     *
-     * @return void
-     */
     protected function assertProductPricesBeforeOrderAmendment(OrderAmendmentsApiTester $I): void
     {
         $I->sendGET($I->getConcreteProductPricesUrl($this->fixtures->getProductWithBiggerPrice()->getSku()));

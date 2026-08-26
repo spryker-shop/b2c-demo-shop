@@ -21,9 +21,6 @@ class FacadeDynamicTypeExtension extends AbstractSprykerDynamicTypeExtension imp
         'getFactory' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractFacade::class;

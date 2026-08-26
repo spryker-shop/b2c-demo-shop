@@ -41,19 +41,11 @@ class CustomerHelper extends Module
     use DependencyHelperTrait;
     use LocatorHelperTrait;
 
-    /**
-     * @param \Codeception\TestInterface $step
-     *
-     * @return void
-     */
     public function _before(TestInterface $step): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $this->cleanUpDatabase();
     }
 
-    /**
-     * @return void
-     */
     protected function cleanUpDatabase(): void
     {
         $customer = [
@@ -66,11 +58,6 @@ class CustomerHelper extends Module
         }
     }
 
-    /**
-     * @param string $email
-     *
-     * @return void
-     */
     protected function deleteCustomerByEmail(string $email): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
@@ -84,11 +71,6 @@ class CustomerHelper extends Module
         $customerEntity->delete();
     }
 
-    /**
-     * @param \Orm\Zed\Customer\Persistence\SpyCustomer $customerEntity
-     *
-     * @return void
-     */
     protected function deleteCustomerAddresses(SpyCustomer $customerEntity): void
     {
         $addresses = $customerEntity->getAddresses();
@@ -99,11 +81,6 @@ class CustomerHelper extends Module
         $addresses->delete();
     }
 
-    /**
-     * @param \Orm\Zed\Customer\Persistence\SpyCustomer $customerEntity
-     *
-     * @return void
-     */
     protected function deleteNewsletterSubscription(SpyCustomer $customerEntity): void
     {
         $newsletterSubscriptions = $customerEntity->getSpyNewsletterSubscribers();
@@ -119,11 +96,6 @@ class CustomerHelper extends Module
         }
     }
 
-    /**
-     * @param string $email
-     *
-     * @return \Orm\Zed\Customer\Persistence\SpyCustomer|null
-     */
     public function loadCustomerByEmail(string $email): ?SpyCustomer
     {
         $customerQuery = new SpyCustomerQuery();
@@ -131,11 +103,6 @@ class CustomerHelper extends Module
         return $customerQuery->findOneByEmail($email);
     }
 
-    /**
-     * @param array $seed
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function haveRegisteredCustomer(array $seed = []): CustomerTransfer
     {
         $this->setupSession();
@@ -154,9 +121,6 @@ class CustomerHelper extends Module
         return $customerTransfer;
     }
 
-    /**
-     * @return \Spryker\Zed\Customer\Business\CustomerFacadeInterface
-     */
     private function getFacade(): CustomerFacadeInterface
     {
         return $this->getLocator()->customer()->facade();
@@ -170,14 +134,6 @@ class CustomerHelper extends Module
         return Stub::makeEmpty(MailFacadeInterface::class);
     }
 
-    /**
-     * @param string $email
-     * @param string $address
-     * @param bool $isDefaultShipping
-     * @param bool $isDefaultBilling
-     *
-     * @return void
-     */
     public function addAddressToCustomer(string $email, string $address, bool $isDefaultShipping = true, bool $isDefaultBilling = true): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
@@ -201,12 +157,6 @@ class CustomerHelper extends Module
         $customerEntity->save();
     }
 
-    /**
-     * @param string $email
-     * @param string $type
-     *
-     * @return void
-     */
     public function addNewsletterSubscription(string $email, string $type = NewsletterConstants::DEFAULT_NEWSLETTER_TYPE): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
@@ -225,11 +175,6 @@ class CustomerHelper extends Module
         $newsletterFacade->subscribeWithDoubleOptIn($newsletterSubscriptionRequestTransfer);
     }
 
-    /**
-     * @param array $seed
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function amLoggedInCustomer(array $seed = []): CustomerTransfer
     {
         $customerTransfer = $this->haveRegisteredCustomer($seed);
@@ -254,9 +199,6 @@ class CustomerHelper extends Module
         return $this->getModule('WebDriver');
     }
 
-    /**
-     * @return void
-     */
     protected function setupSession(): void
     {
         $sessionContainer = new Session(new MockArraySessionStorage());

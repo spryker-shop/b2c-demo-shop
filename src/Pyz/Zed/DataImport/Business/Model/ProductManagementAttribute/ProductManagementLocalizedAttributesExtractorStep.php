@@ -20,11 +20,6 @@ class ProductManagementLocalizedAttributesExtractorStep implements DataImportSte
      */
     public const KEY_LOCALIZED_ATTRIBUTES = 'localizedAttributes';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $localizedAttributes = [];
@@ -53,8 +48,6 @@ class ProductManagementLocalizedAttributesExtractorStep implements DataImportSte
     }
 
     /**
-     * @param string $data
-     *
      * @return array<string>
      */
     private function toArray(string $data): array

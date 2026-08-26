@@ -34,8 +34,6 @@ class CodeBucketConfig extends AbstractCodeBucketConfig
 
     /**
      * @deprecated This method implementation will be removed when environment configs are cleaned up.
-     *
-     * @return string
      */
     public function getDefaultCodeBucket(): string
     {
@@ -53,17 +51,11 @@ class CodeBucketConfig extends AbstractCodeBucketConfig
         return defined('APPLICATION_REGION') ? APPLICATION_REGION : reset($codeBuckets);
     }
 
-    /**
-     * @return bool
-     */
     protected function isAcpDevOn(): bool
     {
         return APPLICATION_ENV === 'docker.acp.dev';
     }
 
-    /**
-     * @return string
-     */
     protected function getPathInfo(): string
     {
         $requestFromGlobals = Request::createFromGlobals();

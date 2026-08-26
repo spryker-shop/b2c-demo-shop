@@ -96,10 +96,6 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
         self::ASSIGNABLE_PRODUCT_TYPE_CONCRETE,
     ];
 
-    /**
-     * @param \Spryker\Zed\PriceProduct\Business\PriceProductFacadeInterface $priceProductFacade
-     * @param \Spryker\Zed\DataImport\Dependency\Service\DataImportToUtilEncodingServiceInterface $utilEncodingService
-     */
     public function __construct(
         PriceProductFacadeInterface $priceProductFacade,
         DataImportToUtilEncodingServiceInterface $utilEncodingService,
@@ -107,11 +103,6 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
         parent::__construct($priceProductFacade, $utilEncodingService);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $dataSet = $this->assignProductType($dataSet);
@@ -119,11 +110,6 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
         parent::execute($dataSet);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface
-     */
     protected function assignProductType(DataSetInterface $dataSet): DataSetInterface
     {
         $this->assertAssignableProductTypeColumn($dataSet);
@@ -139,12 +125,8 @@ class CombinedProductPriceHydratorStep extends ProductPriceHydratorStep
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException
      * @throws \Pyz\Zed\DataImport\Business\Exception\InvalidDataException
-     *
-     * @return void
      */
     protected function assertAssignableProductTypeColumn(DataSetInterface $dataSet): void
     {

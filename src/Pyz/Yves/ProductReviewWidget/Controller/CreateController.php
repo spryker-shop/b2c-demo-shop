@@ -18,11 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class CreateController extends SprykerCreateController
 {
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
     public function indexAction(Request $request): RedirectResponse
     {
         $this->executeIndexAction($request);
@@ -30,11 +25,6 @@ class CreateController extends SprykerCreateController
         return $this->redirectResponseExternal($this->getRefererUrl($request));
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return string
-     */
     protected function getRefererUrl(Request $request): string
     {
         if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {
@@ -44,17 +34,12 @@ class CreateController extends SprykerCreateController
         return static::URL_MAIN;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return void
-     */
     protected function executeIndexAction(Request $request): void
     {
         $idProductAbstract = $request->attributes->get('idProductAbstract');
         $productReviewForm = $this->getFactory()
-            ->createProductReviewForm($idProductAbstract)
-            ->handleRequest($request);
+        ->createProductReviewForm($idProductAbstract)
+        ->handleRequest($request);
 
         if (!$productReviewForm->isSubmitted()) {
             return;
@@ -77,12 +62,12 @@ class CreateController extends SprykerCreateController
         }
 
         $productReviewRequestTransfer = $productReviewForm->getData()
-            ->setCustomerReference($customerTransfer->getCustomerReference())
-            ->setLocaleName($this->getLocale());
+        ->setCustomerReference($customerTransfer->getCustomerReference())
+        ->setLocaleName($this->getLocale());
 
         $productReviewResponseTransfer = $this->getFactory()
-            ->getProductReviewClient()
-            ->submitCustomerReview($productReviewRequestTransfer);
+        ->getProductReviewClient()
+        ->submitCustomerReview($productReviewRequestTransfer);
 
         if ($productReviewResponseTransfer->getIsSuccess() === false) {
             $this->addErrorMessage($productReviewResponseTransfer->getErrors()[0]->getMessage());

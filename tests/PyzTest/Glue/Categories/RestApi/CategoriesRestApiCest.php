@@ -24,16 +24,8 @@ use PyzTest\Glue\Categories\CategoriesRestApiTester;
  */
 class CategoriesRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\Categories\RestApi\CategoriesRestApiFixtures
-     */
     protected CategoriesRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Categories\CategoriesRestApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(CategoriesRestApiTester $I): void
     {
         /** @var \PyzTest\Glue\Categories\RestApi\CategoriesRestApiFixtures $fixtures */
@@ -44,10 +36,6 @@ class CategoriesRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Categories\CategoriesRestApiTester $I
-     *
-     * @return void
      */
     public function requestCategoryNodeHasUrlAttribute(CategoriesRestApiTester $I): void
     {

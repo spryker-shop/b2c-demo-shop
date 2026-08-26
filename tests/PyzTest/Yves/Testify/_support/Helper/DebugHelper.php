@@ -20,11 +20,6 @@ class DebugHelper extends Module
 {
     use ConfigHelperTrait;
 
-    /**
-     * @param array $settings
-     *
-     * @return void
-     */
     public function _beforeSuite(array $settings = []): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         $_COOKIE['XDEBUG_SESSION'] = 'XDEBUG_ECLIPSE'; // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable

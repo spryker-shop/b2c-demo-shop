@@ -15,17 +15,11 @@ use Spryker\Zed\CmsBlockProductStorage\CmsBlockProductStorageConfig as SprykerCm
 
 class CmsBlockProductStorageConfig extends SprykerCmsBlockProductStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getCmsBlockProductSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

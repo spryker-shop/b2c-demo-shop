@@ -13,19 +13,11 @@ use Spryker\Zed\Development\DevelopmentConfig as SprykerDevelopmentConfig;
 
 class DevelopmentConfig extends SprykerDevelopmentConfig
 {
-    /**
-     * @return string
-     */
     public function getCodingStandard(): string
     {
         return APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'phpcs.xml';
     }
 
-    /**
-     * @param string $namespace
-     *
-     * @return string|null
-     */
     public function getPathToInternalNamespace(string $namespace): ?string
     {
         $pathToSprykerRoot = $this->checkPathToSprykerRoot($namespace);
@@ -35,7 +27,7 @@ class DevelopmentConfig extends SprykerDevelopmentConfig
 
         if (array_key_exists($namespace, $this->getPathsToInternalNamespace())) {
             $mergedInternalNamespacesToPathMapping =
-                static::INTERNAL_NAMESPACES_TO_PATH_MAPPING + parent::INTERNAL_NAMESPACES_TO_PATH_MAPPING;
+            static::INTERNAL_NAMESPACES_TO_PATH_MAPPING + parent::INTERNAL_NAMESPACES_TO_PATH_MAPPING;
 
             return $mergedInternalNamespacesToPathMapping[$namespace];
         }

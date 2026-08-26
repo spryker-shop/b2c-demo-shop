@@ -39,22 +39,12 @@ class MultiFactorAuthRestApiTester extends ApiEndToEndTester
      */
     protected const TEST_PASSWORD = 'Change!23456';
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     *
-     * @return void
-     */
     public function authorizeCustomerToGlue(CustomerTransfer $customerTransfer): void
     {
         $oauthResponseTransfer = $this->haveAuthorizationToGlue($customerTransfer);
         $this->amBearerAuthenticated($oauthResponseTransfer->getAccessToken());
     }
 
-    /**
-     * @param string $customerName
-     *
-     * @return \Generated\Shared\Transfer\CustomerTransfer
-     */
     public function createCustomer(string $customerName): CustomerTransfer
     {
         $customerTransfer = $this->haveCustomer([
@@ -66,12 +56,6 @@ class MultiFactorAuthRestApiTester extends ApiEndToEndTester
         return $this->confirmCustomer($customerTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\CustomerTransfer $customerTransfer
-     * @param string $mfaType
-     *
-     * @return string|null
-     */
     public function getCustomerMultiFactorAuthCodeFromDatabase(CustomerTransfer $customerTransfer, string $mfaType): ?string
     {
         $customerMultiFactorAuthCodeEntity = (new SpyCustomerMultiFactorAuthCodesQuery())

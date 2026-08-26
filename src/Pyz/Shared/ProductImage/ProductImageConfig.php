@@ -13,9 +13,6 @@ use Spryker\Shared\ProductImage\ProductImageConfig as SprykerProductImageConfig;
 
 class ProductImageConfig extends SprykerProductImageConfig
 {
-    /**
-     * @return bool
-     */
     public function isProductImageAlternativeTextEnabled(): bool
     {
         return true;

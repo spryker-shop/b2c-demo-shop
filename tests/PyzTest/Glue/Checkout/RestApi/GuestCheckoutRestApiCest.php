@@ -46,16 +46,8 @@ class GuestCheckoutRestApiCest
      */
     protected const RESPONSE_DETAILS_CART_IS_EMPTY = 'Cart is empty.';
 
-    /**
-     * @var \PyzTest\Glue\Checkout\RestApi\Fixtures\GuestCheckoutRestApiFixtures
-     */
     protected GuestCheckoutRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(CheckoutApiTester $I): void
     {
         /** @var \PyzTest\Glue\Checkout\RestApi\Fixtures\GuestCheckoutRestApiFixtures $fixtures */
@@ -65,10 +57,6 @@ class GuestCheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithNoItemsInQuote(CheckoutApiTester $I): void
     {
@@ -121,10 +109,6 @@ class GuestCheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndInvoicePayment(CheckoutApiTester $I): void
     {
@@ -174,10 +158,6 @@ class GuestCheckoutRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Checkout\CheckoutApiTester $I
-     *
-     * @return void
      */
     public function requestWithOneItemInQuoteAndCreditCardPayment(CheckoutApiTester $I): void
     {

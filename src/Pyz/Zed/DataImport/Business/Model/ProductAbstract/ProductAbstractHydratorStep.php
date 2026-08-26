@@ -180,11 +180,6 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
      */
     public const KEY_ID_PRODUCT_ABSTRACT = 'id_product_abstract';
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function execute(DataSetInterface $dataSet): void
     {
         $this->importProductAbstract($dataSet);
@@ -193,11 +188,6 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
         $this->importProductUrls($dataSet);
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function importProductAbstract(DataSetInterface $dataSet): void
     {
         $productAbstractEntityTransfer = new SpyProductAbstractEntityTransfer();
@@ -218,11 +208,6 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
         $dataSet[static::DATA_PRODUCT_ABSTRACT_TRANSFER] = $productAbstractEntityTransfer;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function importProductAbstractLocalizedAttributes(DataSetInterface $dataSet): void
     {
         $localizedAttributeTransfer = [];
@@ -248,11 +233,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     }
 
     /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
      * @throws \Spryker\Zed\DataImport\Business\Exception\DataKeyNotFoundInDataSetException
-     *
-     * @return void
      */
     protected function importProductCategories(DataSetInterface $dataSet): void
     {
@@ -285,11 +266,6 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
         $dataSet[static::DATA_PRODUCT_CATEGORY_TRANSFER] = $productCategoryTransfers;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function importProductUrls(DataSetInterface $dataSet): void
     {
         $urlsTransfer = [];
@@ -313,8 +289,6 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     }
 
     /**
-     * @param string $categoryKeys
-     *
      * @return array<string>
      */
     protected function getCategoryKeys(string $categoryKeys): array
@@ -325,8 +299,6 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
     }
 
     /**
-     * @param string $categoryProductOrder
-     *
      * @return array<string>
      */
     protected function getCategoryProductOrder(string $categoryProductOrder): array

@@ -26,8 +26,6 @@ class TransferConfig extends SprykerTransferConfig
     /**
      * We use strict name validation for core internal usage and enable this by default for all
      * new projects.
-     *
-     * @return bool
      */
     public function isTransferNameValidated(): bool
     {
@@ -36,8 +34,6 @@ class TransferConfig extends SprykerTransferConfig
 
     /**
      * We use strict validation for case sensitive declaration for all new projects.
-     *
-     * @return bool
      */
     public function isCaseValidated(): bool
     {
@@ -46,25 +42,17 @@ class TransferConfig extends SprykerTransferConfig
 
     /**
      * We use strict validation for collections and singular definition for all new projects.
-     *
-     * @return bool
      */
     public function isSingularRequired(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public function isTransferXmlValidationEnabled(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
     public function isTransferSuffixCheckStrict(): bool
     {
         return true;

@@ -22,10 +22,6 @@ interface OmsFacadeInterface extends SprykerOmsFacadeInterface
      * - Dummy implementation for presenting TimeoutProcessor behavior.
      *
      * @api
-     *
-     * @param \Generated\Shared\Transfer\TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\TimeoutProcessorTimeoutResponseTransfer
      */
     public function calculateInitiationTimeout(
         TimeoutProcessorTimeoutRequestTransfer $timeoutProcessorTimeoutRequestTransfer,

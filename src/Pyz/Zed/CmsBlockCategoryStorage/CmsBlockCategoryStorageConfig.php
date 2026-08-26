@@ -15,17 +15,11 @@ use Spryker\Zed\CmsBlockCategoryStorage\CmsBlockCategoryStorageConfig as Spryker
 
 class CmsBlockCategoryStorageConfig extends SprykerCmsBlockCategoryStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getCmsBlockCategorySynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

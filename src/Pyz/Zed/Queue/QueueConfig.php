@@ -66,9 +66,6 @@ class QueueConfig extends SprykerQueueConfig
         ];
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RabbitMqConsumerOptionTransfer
-     */
     protected function getRabbitMqQueueMessageCheckOptions(): RabbitMqConsumerOptionTransfer
     {
         $queueOptionTransfer = $this->getRabbitMqQueueConsumerOptions();
@@ -77,9 +74,6 @@ class QueueConfig extends SprykerQueueConfig
         return $queueOptionTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\RabbitMqConsumerOptionTransfer
-     */
     protected function getRabbitMqQueueConsumerOptions(): RabbitMqConsumerOptionTransfer
     {
         $queueOptionTransfer = new RabbitMqConsumerOptionTransfer();

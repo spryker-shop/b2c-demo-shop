@@ -32,16 +32,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CustomerRegistrationCest
 {
-    /**
-     * @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures
-     */
     protected CustomerRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $i
-     *
-     * @return void
-     */
     public function _before(CustomerApiTester $i): void
     {
         /** @var \PyzTest\Glue\Customer\RestApi\CustomerRestApiFixtures $fixtures */
@@ -50,11 +42,6 @@ class CustomerRegistrationCest
         $this->fixtures = $fixtures;
     }
 
-    /**
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     *
-     * @return void
-     */
     public function requestPostCustomerFailsOnExistingEmailUsage(CustomerApiTester $I): void
     {
         // Arrange
@@ -97,11 +84,6 @@ class CustomerRegistrationCest
 
     /**
      * @dataProvider requestPostCustomerFailsValidationDataProvider
-     *
-     * @param \PyzTest\Glue\Customer\CustomerApiTester $I
-     * @param \Codeception\Example $example
-     *
-     * @return void
      */
     public function requestPostCustomerFailsValidation(CustomerApiTester $I, Example $example): void
     {
@@ -128,9 +110,6 @@ class CustomerRegistrationCest
         }
     }
 
-    /**
-     * @return array
-     */
     protected function requestPostCustomerFailsValidationDataProvider(): array
     {
         return [

@@ -23,9 +23,6 @@ class ControllerDynamicTypeExtension extends AbstractSprykerDynamicTypeExtension
         'getFactory' => true,
     ];
 
-    /**
-     * @return string
-     */
     public function getClass(): string
     {
         return AbstractController::class;

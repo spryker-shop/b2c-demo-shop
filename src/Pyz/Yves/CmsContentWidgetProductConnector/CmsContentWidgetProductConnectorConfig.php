@@ -13,9 +13,6 @@ use Spryker\Yves\CmsContentWidgetProductConnector\CmsContentWidgetProductConnect
 
 class CmsContentWidgetProductConnectorConfig extends SprykerCmsContentWidgetProductConnectorConfig
 {
-    /**
-     * @return bool
-     */
     public function isUnavailableProductsDisplayed(): bool
     {
         return true;

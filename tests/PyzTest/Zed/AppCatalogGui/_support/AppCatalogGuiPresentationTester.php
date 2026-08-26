@@ -33,9 +33,6 @@ class AppCatalogGuiPresentationTester extends Actor
 {
     use _generated\AppCatalogGuiPresentationTesterActions;
 
-    /**
-     * @return string
-     */
     public function getLocale(): string
     {
         return mb_substr($this->getLocator()->locale()->facade()->getCurrentLocaleName(), 0, 2);

@@ -15,17 +15,11 @@ use Spryker\Zed\ProductDiscontinuedStorage\ProductDiscontinuedStorageConfig as S
 
 class ProductDiscontinuedStorageConfig extends SprykerProductDiscontinuedStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getProductDiscontinuedSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

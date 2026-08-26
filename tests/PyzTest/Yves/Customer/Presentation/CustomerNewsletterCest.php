@@ -27,21 +27,11 @@ use Spryker\Zed\Newsletter\NewsletterDependencyProvider;
  */
 class CustomerNewsletterCest
 {
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(CustomerPresentationTester $i): void
     {
         $i->amYves();
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanSubscribeNewsletter(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -54,11 +44,6 @@ class CustomerNewsletterCest
         $i->seeInSource(CustomerNewsletterPage::SUCCESS_MESSAGE_SUBSCRIBED);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanUnSubscribeNewsletter(CustomerPresentationTester $i): void
     {
         $customerTransfer = $i->amLoggedInCustomer();

@@ -24,21 +24,11 @@ use PyzTest\Yves\Customer\PageObject\CustomerProfilePage;
  */
 class CustomerProfileCest
 {
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function _before(CustomerPresentationTester $i): void
     {
         $i->amYves();
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanUpdateProfileData(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -54,11 +44,6 @@ class CustomerProfileCest
         $i->seeInSource(CustomerProfilePage::SUCCESS_MESSAGE);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanUpdateEmail(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -70,11 +55,6 @@ class CustomerProfileCest
         $i->seeInSource(CustomerProfilePage::CONFIRM_EMAIL_MESSAGE);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanNotUpdateEmailToAnAlreadyUsedOne(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();
@@ -87,11 +67,6 @@ class CustomerProfileCest
         $i->seeInSource(CustomerProfilePage::ERROR_MESSAGE_EMAIL);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanChangePassword(CustomerPresentationTester $i): void
     {
         $customerTransfer = $i->amLoggedInCustomer();
@@ -108,11 +83,6 @@ class CustomerProfileCest
         $i->seeInSource(CustomerProfilePage::SUCCESS_MESSAGE_CHANGE_PASSWORD);
     }
 
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanNotChangePasswordWhenNewPasswordsNotMatch(CustomerPresentationTester $i): void
     {
         $i->amLoggedInCustomer();

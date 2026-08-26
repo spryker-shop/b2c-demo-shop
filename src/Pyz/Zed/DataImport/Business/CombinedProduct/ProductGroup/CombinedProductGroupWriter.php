@@ -29,9 +29,6 @@ class CombinedProductGroupWriter extends ProductGroupWriter
      */
     public const COLUMN_POSITION = 'product_group.position';
 
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\Product\Repository\ProductRepository $productRepository
-     */
     public function __construct(ProductRepository $productRepository)
     {
         parent::__construct($productRepository);

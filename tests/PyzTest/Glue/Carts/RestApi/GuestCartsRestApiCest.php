@@ -30,16 +30,8 @@ use Spryker\Shared\Calculation\CalculationPriceMode;
  */
 class GuestCartsRestApiCest
 {
-    /**
-     * @var \PyzTest\Glue\Carts\RestApi\Fixtures\GuestCartsRestApiFixtures
-     */
     protected GuestCartsRestApiFixtures $fixtures;
 
-    /**
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
-     */
     public function loadFixtures(CartsApiTester $I): void
     {
         /** @var \PyzTest\Glue\Carts\RestApi\Fixtures\GuestCartsRestApiFixtures $fixtures */
@@ -50,10 +42,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCartByUuid(CartsApiTester $I): void
     {
@@ -94,10 +82,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCarts(CartsApiTester $I): void
     {
@@ -137,10 +121,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCartByUuidWithGuestCartItemsRelationship(CartsApiTester $I): void
     {
@@ -197,10 +177,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCartByUuidWithProductConcreteRelationship(CartsApiTester $I): void
     {
@@ -261,10 +237,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGuestCartByNotExistingGuestCartUuid(CartsApiTester $I): void
     {
@@ -285,10 +257,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestCreateGuestCart(CartsApiTester $I): void
     {
@@ -330,10 +298,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestCreateGuestCartWithoutAnonymousCustomerUniqueId(CartsApiTester $I): void
     {
@@ -358,10 +322,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestCreateGuestCartWithoutSku(CartsApiTester $I): void
     {
@@ -391,10 +351,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestCreateGuestCartWithoutQuantity(CartsApiTester $I): void
     {
@@ -424,10 +380,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestGetGuestCartWithoutAnonymousCustomerUniqueId(CartsApiTester $I): void
     {
@@ -448,10 +400,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateGuestCart(CartsApiTester $I): void
     {
@@ -515,10 +463,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdatePriceModeOfNonEmptyGuestCart(CartsApiTester $I): void
     {
@@ -564,10 +508,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateGuestCartWithoutGuestCartUuid(CartsApiTester $I): void
     {
@@ -599,10 +539,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateGuestCartWithoutAnonymousCustomerUniqueId(CartsApiTester $I): void
     {
@@ -642,10 +578,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestAddItemsToGuestCart(CartsApiTester $I): void
     {
@@ -708,10 +640,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestAddItemsToGuestCartWithoutAnonymousCustomerUniqueId(CartsApiTester $I): void
     {
@@ -751,10 +679,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestAddItemsToGuestCartWithoutItemSku(CartsApiTester $I): void
     {
@@ -799,10 +723,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestAddItemsToGuestCartWithoutItemQuantity(CartsApiTester $I): void
     {
@@ -846,10 +766,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateItemsInGuestCart(CartsApiTester $I): void
     {
@@ -915,10 +831,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateItemsInGuestCartWithoutGuestCartUuid(CartsApiTester $I): void
     {
@@ -955,10 +867,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateItemsInGuestCartWithoutAnonymousCustomerUniqueId(CartsApiTester $I): void
     {
@@ -998,10 +906,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateItemsInGuestCartWithoutQuantity(CartsApiTester $I): void
     {
@@ -1045,10 +949,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestUpdateItemsInGuestCartWithoutItemSku(CartsApiTester $I): void
     {
@@ -1092,10 +992,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestDeleteItemsFromGuestCart(CartsApiTester $I): void
     {
@@ -1131,10 +1027,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestDeleteItemsFromGuestCartWithoutGuestCartUuid(CartsApiTester $I): void
     {
@@ -1163,10 +1055,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestDeleteItemsFromGuestCartWithoutAnonymousCustomerUniqueId(CartsApiTester $I): void
     {
@@ -1198,10 +1086,6 @@ class GuestCartsRestApiCest
 
     /**
      * @depends loadFixtures
-     *
-     * @param \PyzTest\Glue\Carts\CartsApiTester $I
-     *
-     * @return void
      */
     public function requestDeleteItemsFromGuestCartWithoutItemSku(CartsApiTester $I): void
     {

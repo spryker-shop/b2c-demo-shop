@@ -45,133 +45,71 @@ class StartPickingBackendJsonApiFixtures implements FixturesBuilderInterface, Fi
      */
     protected const STATUS_PICKING_FINISHED = 'picking-finished';
 
-    /**
-     * @var \Generated\Shared\Transfer\StockTransfer
-     */
     protected StockTransfer $warehouseTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\UserTransfer
-     */
     protected UserTransfer $mainWarehouseUserTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\UserTransfer
-     */
     protected UserTransfer $secondaryWarehouseUserTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\UserTransfer
-     */
     protected UserTransfer $withInactiveAssignmentWarehouseUserTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\UserTransfer
-     */
     protected UserTransfer $withoutAssignmentWarehouseUserTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\UserTransfer
-     */
     protected UserTransfer $notWarehouseUserTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\PickingListTransfer
-     */
     protected PickingListTransfer $readyForPickingPickingListTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\PickingListTransfer
-     */
     protected PickingListTransfer $pickingStartedPickingListTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\PickingListTransfer
-     */
     protected PickingListTransfer $pickingFinishedPickingListTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\PickingListTransfer
-     */
     protected PickingListTransfer $immutableReadyForPickingPickingListTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function getMainWarehouseUserTransfer(): UserTransfer
     {
         return $this->mainWarehouseUserTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function getSecondaryWarehouseUserTransfer(): UserTransfer
     {
         return $this->secondaryWarehouseUserTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function getWithInactiveAssignmentWarehouseUserTransfer(): UserTransfer
     {
         return $this->withInactiveAssignmentWarehouseUserTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function getWithoutAssignmentWarehouseUserTransfer(): UserTransfer
     {
         return $this->withoutAssignmentWarehouseUserTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function getNotWarehouseUserTransfer(): UserTransfer
     {
         return $this->notWarehouseUserTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\PickingListTransfer
-     */
     public function getReadyForPickingPickingListTransfer(): PickingListTransfer
     {
         return $this->readyForPickingPickingListTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\PickingListTransfer
-     */
     public function getPickingStartedPickingListTransfer(): PickingListTransfer
     {
         return $this->pickingStartedPickingListTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\PickingListTransfer
-     */
     public function getPickingFinishedPickingListTransfer(): PickingListTransfer
     {
         return $this->pickingFinishedPickingListTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\PickingListTransfer
-     */
     public function getImmutableReadyForPickingPickingListTransfer(): PickingListTransfer
     {
         return $this->immutableReadyForPickingPickingListTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(PickingListsBackendApiTester $I): FixturesContainerInterface
     {
         $this->createWarehouse($I);
@@ -181,21 +119,11 @@ class StartPickingBackendJsonApiFixtures implements FixturesBuilderInterface, Fi
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
-     */
     protected function createWarehouse(PickingListsBackendApiTester $I): void
     {
         $this->warehouseTransfer = $I->haveStock();
     }
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
-     */
     protected function createUsers(PickingListsBackendApiTester $I): void
     {
         $this->mainWarehouseUserTransfer = $I->haveUser([
@@ -235,11 +163,6 @@ class StartPickingBackendJsonApiFixtures implements FixturesBuilderInterface, Fi
         $this->notWarehouseUserTransfer->setPassword(static::TEST_USER_PASSWORD);
     }
 
-    /**
-     * @param \PyzTest\Glue\PickingListsBackend\PickingListsBackendApiTester $I
-     *
-     * @return void
-     */
     protected function createPickingLists(PickingListsBackendApiTester $I): void
     {
         $productConcreteTransfer = $I->haveProduct();

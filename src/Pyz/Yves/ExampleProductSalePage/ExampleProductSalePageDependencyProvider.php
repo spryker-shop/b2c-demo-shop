@@ -49,11 +49,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
      */
     public const SERVICE_UTIL_NUMBER = 'SERVICE_UTIL_NUMBER';
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     public function provideDependencies(Container $container): Container
     {
         $container = $this->addSearchClient($container);
@@ -67,11 +62,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addSearchClient(Container $container): Container
     {
         $container->set(static::CLIENT_SEARCH, function (Container $container) {
@@ -81,11 +71,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addUrlStorageClient(Container $container): Container
     {
         $container->set(static::CLIENT_URL_STORAGE, function (Container $container) {
@@ -95,11 +80,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addClientStore(Container $container): Container
     {
         $container->set(static::CLIENT_STORE, function (Container $container) {
@@ -109,11 +89,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addCatalogClient(Container $container): Container
     {
         $container->set(static::CLIENT_CATALOG, function (Container $container) {
@@ -123,11 +98,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addProductSalePageWidgetPlugins(Container $container): Container
     {
         $container->set(static::PLUGIN_PRODUCT_SALE_PAGE_WIDGETS, function () {
@@ -137,11 +107,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addLocaleClient(Container $container): Container
     {
         $container->set(static::CLIENT_LOCALE, function (Container $container) {
@@ -151,11 +116,6 @@ class ExampleProductSalePageDependencyProvider extends AbstractBundleDependencyP
         return $container;
     }
 
-    /**
-     * @param \Spryker\Yves\Kernel\Container $container
-     *
-     * @return \Spryker\Yves\Kernel\Container
-     */
     protected function addUtilNumberService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_NUMBER, function (Container $container) {

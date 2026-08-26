@@ -182,8 +182,6 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
      * NetTotalCalculatorPlugin - Calculate total amount before taxes
      *   - Totals.netTotal
      *
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
      * @return array<\Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface>
      */
     protected function getQuoteCalculatorPluginStack(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
@@ -239,8 +237,6 @@ class CalculationDependencyProvider extends SprykerCalculationDependencyProvider
 
     /**
      * This calculator plugin stack working with order object which happens to be created after order is placed
-     *
-     * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return array<\Spryker\Zed\CalculationExtension\Dependency\Plugin\CalculationPluginInterface>
      */

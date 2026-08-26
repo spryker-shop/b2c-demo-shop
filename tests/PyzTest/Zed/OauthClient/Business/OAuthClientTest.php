@@ -42,9 +42,6 @@ class OAuthClientTest extends Unit
      */
     protected const TEST_SUCCESS_PROVIDER_NAME = 'test-success-provider-name';
 
-    /**
-     * @return void
-     */
     public function testOauthTokenRequestContainsAllTheNecessaryData(): void
     {
         // Arrange

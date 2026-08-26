@@ -30,29 +30,15 @@ use SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface;
  */
 class PriceProductsRestApiFixtures implements FixturesBuilderInterface, FixturesContainerInterface
 {
-    /**
-     * @var \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     protected ProductConcreteTransfer $productConcreteTransfer;
 
-    /**
-     * @var \Generated\Shared\Transfer\PriceProductTransfer
-     */
     protected PriceProductTransfer $priceProductTransfer;
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteTransfer
-     */
     public function getProductConcreteTransfer(): ProductConcreteTransfer
     {
         return $this->productConcreteTransfer;
     }
 
-    /**
-     * @param \PyzTest\Glue\PriceProducts\PriceProductsApiTester $I
-     *
-     * @return \SprykerTest\Shared\Testify\Fixtures\FixturesContainerInterface
-     */
     public function buildFixtures(PriceProductsApiTester $I): FixturesContainerInterface
     {
         $this->createProductConcrete($I);
@@ -61,21 +47,11 @@ class PriceProductsRestApiFixtures implements FixturesBuilderInterface, Fixtures
         return $this;
     }
 
-    /**
-     * @param \PyzTest\Glue\PriceProducts\PriceProductsApiTester $I
-     *
-     * @return void
-     */
     protected function createProductConcrete(PriceProductsApiTester $I): void
     {
         $this->productConcreteTransfer = $I->haveFullProduct();
     }
 
-    /**
-     * @param \PyzTest\Glue\PriceProducts\PriceProductsApiTester $I
-     *
-     * @return void
-     */
     protected function createPriceProduct(PriceProductsApiTester $I): void
     {
         $priceTypeTransfer = $I->havePriceType([PriceTypeTransfer::NAME => 'DEFAULT']);

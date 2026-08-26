@@ -13,9 +13,6 @@ use Spryker\Client\ProductDiscontinuedStorage\ProductDiscontinuedStorageConfig a
 
 class ProductDiscontinuedStorageConfig extends SprykerProductDiscontinuedStorageConfig
 {
-    /**
-     * @return bool
-     */
     public function isOnlyDiscontinuedVariantAttributesPostfixEnabled(): bool
     {
         return true;

@@ -13,9 +13,6 @@ use Spryker\Zed\DocumentationGeneratorRestApi\DocumentationGeneratorRestApiConfi
 
 class DocumentationGeneratorRestApiConfig extends SprykerDocumentationGeneratorRestApiConfig
 {
-    /**
-     * @return bool
-     */
     public function isNestedRelationshipsEnabled(): bool
     {
         return true;

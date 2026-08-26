@@ -48,19 +48,11 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
      */
     protected $productImageRepository;
 
-    /**
-     * @param \Pyz\Zed\DataImport\Business\Model\ProductImage\Repository\ProductImageRepositoryInterface $productImageRepository
-     */
     public function __construct(ProductImageRepositoryInterface $productImageRepository)
     {
         $this->productImageRepository = $productImageRepository;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     public function write(DataSetInterface $dataSet): void
     {
         $productImageSetEntity = $this->createOrUpdateProductImageSet($dataSet);
@@ -69,19 +61,11 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         $this->createOrUpdateImageToImageSetRelation($productImageSetEntity, $productImageEntity, $dataSet);
     }
 
-    /**
-     * @return void
-     */
     public function flush(): void
     {
         DataImporterPublisher::triggerEvents();
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Orm\Zed\ProductImage\Persistence\SpyProductImageSet
-     */
     protected function createOrUpdateProductImageSet(DataSetInterface $dataSet): SpyProductImageSet
     {
         $productImageSetEntityTransfer = $this->getProductImageSetTransfer($dataSet);
@@ -102,12 +86,6 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         return $productImageSetEntity;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $productImageSetEntity
-     *
-     * @return \Orm\Zed\ProductImage\Persistence\SpyProductImage
-     */
     protected function createOrUpdateProductImage(
         DataSetInterface $dataSet,
         SpyProductImageSet $productImageSetEntity,
@@ -130,13 +108,6 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         return $productImageEntity;
     }
 
-    /**
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $productImageSetEntity
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return void
-     */
     protected function createOrUpdateImageToImageSetRelation(
         SpyProductImageSet $productImageSetEntity,
         SpyProductImage $productImageEntity,
@@ -159,11 +130,6 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         $this->addImagePublishEvents($productImageSetEntity);
     }
 
-    /**
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
-     *
-     * @return \Orm\Zed\ProductImage\Persistence\SpyProductImage
-     */
     protected function saveProductImageAltTextGlossaryKeys(SpyProductImage $productImageEntity): SpyProductImage
     {
         $altTextLargeGlossaryKey = sprintf(
@@ -185,13 +151,6 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         return $productImageEntity;
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImage $productImageEntity
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $productImageSetEntity
-     *
-     * @return void
-     */
     protected function createOrUpdateProductImageAltTexts(
         DataSetInterface $dataSet,
         SpyProductImage $productImageEntity,
@@ -220,13 +179,6 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         }
     }
 
-    /**
-     * @param string $glossaryKey
-     * @param int $idLocale
-     * @param string $value
-     *
-     * @return void
-     */
     protected function createOrUpdateGlossaryKey(
         string $glossaryKey,
         int $idLocale,
@@ -257,42 +209,22 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         );
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\SpyProductImageEntityTransfer
-     */
     protected function getProductImageTransfer(DataSetInterface $dataSet): SpyProductImageEntityTransfer
     {
         return $dataSet[ProductImageHydratorStep::DATA_PRODUCT_IMAGE_TRANSFER];
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\SpyProductImageSetEntityTransfer
-     */
     protected function getProductImageSetTransfer(DataSetInterface $dataSet): SpyProductImageSetEntityTransfer
     {
         return $dataSet[ProductImageHydratorStep::DATA_PRODUCT_IMAGE_SET_TRANSFER];
     }
 
-    /**
-     * @param \Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface $dataSet
-     *
-     * @return \Generated\Shared\Transfer\SpyProductImageSetToProductImageEntityTransfer
-     */
     protected function getProductImageToImageSetRelationTransfer(
         DataSetInterface $dataSet,
     ): SpyProductImageSetToProductImageEntityTransfer {
         return $dataSet[ProductImageHydratorStep::DATA_PRODUCT_IMAGE_TO_IMAGE_SET_RELATION_TRANSFER];
     }
 
-    /**
-     * @param \Orm\Zed\ProductImage\Persistence\SpyProductImageSet $productImageSetEntity
-     *
-     * @return void
-     */
     protected function addImagePublishEvents(SpyProductImageSet $productImageSetEntity): void
     {
         if ($productImageSetEntity->getFkProductAbstract()) {
@@ -312,11 +244,6 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         }
     }
 
-    /**
-     * @param string $productImageKey
-     *
-     * @return \Orm\Zed\ProductImage\Persistence\SpyProductImage
-     */
     protected function findOrCreateProductImageEntityByProductImageKey(string $productImageKey): SpyProductImage
     {
         return $this->productImageRepository->getProductImageEntity($productImageKey);

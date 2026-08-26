@@ -56,9 +56,6 @@ class AvailabilityPresentationTester extends Actor
      */
     public const CART_PRE_CHECK_AVAILABILITY_ERROR_MESSAGE = 'Item 119_29804808 only has availability of 10.';
 
-    /**
-     * @return void
-     */
     public function processCheckout(): void
     {
         $this->processAllCheckoutSteps();

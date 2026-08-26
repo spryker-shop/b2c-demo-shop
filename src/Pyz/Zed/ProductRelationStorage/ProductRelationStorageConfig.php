@@ -15,17 +15,11 @@ use Spryker\Zed\ProductRelationStorage\ProductRelationStorageConfig as SprykerPr
 
 class ProductRelationStorageConfig extends SprykerProductRelationStorageConfig
 {
-    /**
-     * @return string|null
-     */
     public function getProductAbstractRelationSynchronizationPoolName(): ?string
     {
         return SynchronizationConfig::DEFAULT_SYNCHRONIZATION_POOL_NAME;
     }
 
-    /**
-     * @return string|null
-     */
     public function getProductRelationEventQueueName(): ?string
     {
         return PublisherConfig::PUBLISH_QUEUE;

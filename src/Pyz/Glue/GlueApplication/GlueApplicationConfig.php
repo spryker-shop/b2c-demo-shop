@@ -34,17 +34,11 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
         );
     }
 
-    /**
-     * @return bool
-     */
     public function isEagerRelationshipsLoadingEnabled(): bool
     {
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public function isConfigurableResponseEnabled(): bool
     {
         return true;
@@ -60,9 +54,6 @@ class GlueApplicationConfig extends SprykerGlueApplicationConfig
         ];
     }
 
-    /**
-     * @return bool
-     */
     public function isTerminationEnabled(): bool
     {
         return true;
