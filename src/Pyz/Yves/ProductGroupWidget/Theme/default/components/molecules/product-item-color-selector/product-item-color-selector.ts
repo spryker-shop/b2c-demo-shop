@@ -1,5 +1,5 @@
 import ProductItemColorSelectorCore from 'ProductGroupWidget/components/molecules/product-item-color-selector/product-item-color-selector';
-import ProductItem, { ProductItemData } from 'ShopUiProject/components/molecules/product-item/product-item';
+import ProductItem, { ProductItemData } from 'src/ShopUi/components/molecules/product-item/product-item';
 
 export default class ProductItemColorSelector extends ProductItemColorSelectorCore {
     protected productItemData: ProductItemData;
