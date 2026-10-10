@@ -1,5 +1,5 @@
 import Component from 'ShopUi/models/component';
-import noUiSlider from 'nouislider';
+import noUiSlider, { target } from 'nouislider';
 
 interface SliderConfig {
     start: string[];
@@ -13,13 +13,13 @@ interface SliderConfig {
 }
 
 export default class RangeSlider extends Component {
-    protected wrap: HTMLElement;
+    protected wrap: target;
     protected sliderConfig: SliderConfig;
     protected targetSelectors: HTMLInputElement[];
     protected valueTarget: HTMLElement[];
 
     protected init(): void {
-        this.wrap = <HTMLElement>this.getElementsByClassName(this.wrapClassName)[0];
+        this.wrap = <target>this.getElementsByClassName(this.wrapClassName)[0];
         this.targetSelectors = <HTMLInputElement[]>Array.from(this.getElementsByClassName(this.targetClassName));
         this.sliderConfig = {
             start: [this.valueCurrentMin, this.valueCurrentMax],
@@ -44,7 +44,7 @@ export default class RangeSlider extends Component {
         }
     }
 
-    protected updateValues(wrap: noUiSlider, target: HTMLInputElement[]): void {
+    protected updateValues(wrap: target, target: HTMLInputElement[]): void {
         const update = (values, handle) => {
             if (Number(values[handle]) === Number(this.sliderConfig.start[handle])) {
                 target[handle].value = '';
@@ -57,7 +57,7 @@ export default class RangeSlider extends Component {
         wrap.noUiSlider.on('change', update);
     }
 
-    protected updateSelectors(wrap: noUiSlider, target: HTMLElement[]): void {
+    protected updateSelectors(wrap: target, target: HTMLElement[]): void {
         const currency = target[0].innerHTML.replace(/[0-9_,.]/g, '');
         const update = (values, handle) => {
             currency.search(/&nbsp;/i) !== -1

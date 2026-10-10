@@ -12,6 +12,7 @@ namespace PyzTest\Zed\AppCatalogGui\Presentation;
 use PyzTest\Zed\AppCatalogGui\AppCatalogGuiPresentationTester;
 use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiApiLoginPage;
 use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiIndexPage;
+use Spryker\Service\UtilText\Model\Url\Url;
 
 /**
  * Auto-generated group annotations
@@ -39,9 +40,10 @@ class AppCatalogGuiControllerCest
         // Assert
         $I->seeInSource(sprintf(
             AppCatalogGuiIndexPage::APP_CATALOG_SCRIPT,
-            $I->getModuleConfig()->getAppCatalogScriptUrl(),
-            $I->getModuleConfig()->getTenantIdentifier(),
-            $I->getLocale(),
+            Url::generate($I->getModuleConfig()->getAppCatalogScriptUrl(), [
+                'storeReference' => $I->getModuleConfig()->getTenantIdentifier(),
+                'language' => $I->getLocale(),
+            ])->buildEscaped(),
         ));
     }
 
