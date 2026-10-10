@@ -19,5 +19,5 @@ class AppCatalogGuiIndexPage
     /**
      * @var string
      */
-    public const APP_CATALOG_SCRIPT = '<script src="%s?storeReference=%s&amp;language=%s"></script>';
+    public const APP_CATALOG_SCRIPT = '<script src="%s"></script>';
 }
