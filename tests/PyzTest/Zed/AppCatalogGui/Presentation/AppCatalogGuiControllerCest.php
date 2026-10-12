@@ -11,7 +11,6 @@ namespace PyzTest\Zed\AppCatalogGui\Presentation;
 
 use PyzTest\Zed\AppCatalogGui\AppCatalogGuiPresentationTester;
 use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiApiLoginPage;
-use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiIndexPage;
 
 /**
  * Auto-generated group annotations
