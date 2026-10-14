@@ -116,6 +116,15 @@ jobs:
                     docker/sdk exec --env "ENV_REPOSITORY_ID=b2c" cypress-tests \
                         npx cypress run --headless --browser chrome --spec "$CORE_SPECS"
 
+            -   name: Upload screenshots
+                if: failure() && steps.run_tests.outcome == 'failure'
+                uses: actions/upload-artifact@v6
+                with:
+                    name: cypress-screenshots-${{ matrix.shard.shard }}
+                    path: .cypress/screenshots
+                    include-hidden-files: true
+                    if-no-files-found: ignore
+
             -   name: Upload artifacts
                 # Scoped to a test failure: on a failed boot `.cypress` does not exist yet, and
                 # the upload would add a second red step pointing away from the real cause.
