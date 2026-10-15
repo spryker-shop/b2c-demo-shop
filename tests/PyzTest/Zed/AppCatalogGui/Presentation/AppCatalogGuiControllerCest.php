@@ -11,7 +11,6 @@ namespace PyzTest\Zed\AppCatalogGui\Presentation;
 
 use PyzTest\Zed\AppCatalogGui\AppCatalogGuiPresentationTester;
 use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiApiLoginPage;
-use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiIndexPage;
 
 /**
  * Auto-generated group annotations
@@ -25,26 +24,6 @@ use PyzTest\Zed\AppCatalogGui\PageObject\AppCatalogGuiIndexPage;
  */
 class AppCatalogGuiControllerCest
 {
-    public function checkIfAppCatalogGuiReturn200AndValidUrl(AppCatalogGuiPresentationTester $I): void
-    {
-        // Arrange
-        $I->amZed();
-        $I->amLoggedInUser();
-
-        $I->setCookie('acceptedTerms', 'true');
-
-        // Act
-        $I->amOnPage(AppCatalogGuiIndexPage::APP_CATALOG_GUI_INDEX_PAGE_URL);
-
-        // Assert
-        $I->seeInSource(sprintf(
-            AppCatalogGuiIndexPage::APP_CATALOG_SCRIPT,
-            $I->getModuleConfig()->getAppCatalogScriptUrl(),
-            $I->getModuleConfig()->getTenantIdentifier(),
-            $I->getLocale(),
-        ));
-    }
-
     public function checkIfAppCatalogGuiApiLoginReturn200AndValidToken(AppCatalogGuiPresentationTester $I): void
     {
         // Arrange

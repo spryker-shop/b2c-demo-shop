@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <!--
+        spryker/stock 8.17.1 maps spy_stock.uuid into StockProduct::stockUuid whenever the column exists
+        (spryker/warehouse-user and spryker/warehouses-backend-api add it), but declares the property only in
+        spryker-feature/product-experience-management, which this project does not install.
+    -->
+    <transfer name="StockProduct">
+        <property name="stockUuid" type="string"/>
+    </transfer>
+
+</transfers>
