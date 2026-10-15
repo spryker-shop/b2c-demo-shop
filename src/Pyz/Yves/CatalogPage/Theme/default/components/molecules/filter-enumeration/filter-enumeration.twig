@@ -11,7 +11,7 @@
                         checked: (filterValue.value in activeValues),
                     },
                     data: {
-                        label: filterValue.value ~ ' (' ~ filterValue.docCount | executeFilterIfExists('formatInt', app.locale) ~ ')',
+                        label: filterValue.value | e() ~ ' (' ~ filterValue.docCount | executeFilterIfExists('formatInt', app.locale) ~ ')',
                     },
                 } only %}
             </li>
