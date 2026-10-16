@@ -29,7 +29,9 @@ jobs:
             # which specs exist, so the matrix comes from the same tree the shards run.
             -   name: Install cypress-tests folder
                 run: |
-                    cd ./data && composer require "spryker/cypress-tests:dev-feature/cc-39273/cc-39280-sunset-robot-framework-coverage-map-one-clean-cutover" --dev --no-interaction
+                    # The commit composer.lock pins, not the branch head: CI runs the reviewed state.
+                    CYPRESS_TESTS=$(jq -r '.["packages-dev"][] | select(.name == "spryker/cypress-tests") | "\(.version)#\(.source.reference)"' composer.lock)
+                    cd ./data && composer require "spryker/cypress-tests:${CYPRESS_TESTS}" --dev --no-interaction
 
             -   id: compute
                 name: Generate shard matrix
@@ -77,7 +79,9 @@ jobs:
 
             -   name: Install cypress-tests folder
                 run: |
-                    cd ./data && composer require "spryker/cypress-tests:dev-feature/cc-39273/cc-39280-sunset-robot-framework-coverage-map-one-clean-cutover" --dev --no-interaction
+                    # The commit composer.lock pins, not the branch head: CI runs the reviewed state.
+                    CYPRESS_TESTS=$(jq -r '.["packages-dev"][] | select(.name == "spryker/cypress-tests") | "\(.version)#\(.source.reference)"' composer.lock)
+                    cd ./data && composer require "spryker/cypress-tests:${CYPRESS_TESTS}" --dev --no-interaction
                     cp -r vendor/spryker/cypress-tests ../tests/cypress-tests
 
             -   name: Set core spec list
