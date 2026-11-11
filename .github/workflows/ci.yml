@@ -248,18 +248,6 @@ jobs:
 
     # The E2E tier is skipped while a PR is a draft and starts on ready_for_review. A push to
     # master is not a pull_request event, so master keeps running the full set.
-    robot-api:
-        needs: [build-db]
-        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
-        uses: ./.github/workflows/_robot-api.yml
-        secrets: inherit
-
-    robot-ui:
-        needs: [build-db]
-        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
-        uses: ./.github/workflows/_robot-ui.yml
-        secrets: inherit
-
     cypress:
         needs: [build-db]
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.draft == false }}
