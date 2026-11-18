@@ -12,6 +12,7 @@ namespace Pyz\Zed\EventDispatcher;
 use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
 use Spryker\Zed\Acl\Communication\Plugin\EventDispatcher\AccessControlEventDispatcherPlugin;
 use Spryker\Zed\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
+use Spryker\Zed\Captcha\Communication\Plugin\EventDispatcher\LoginCaptchaEventDispatcherPlugin;
 use Spryker\Zed\ErrorHandler\Communication\Plugin\EventDispatcher\ErrorPageEventDispatcherPlugin;
 use Spryker\Zed\EventBehavior\Communication\Plugin\EventDispatcher\EventBehaviorEventDispatcherPlugin;
 use Spryker\Zed\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
@@ -65,6 +66,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ErrorPageEventDispatcherPlugin(),
             new RedirectUrlValidationEventDispatcherPlugin(),
             new EnvironmentInfoHeaderEventDispatcherPlugin(),
+            new LoginCaptchaEventDispatcherPlugin(),
             new SecurityBlockerBackofficeUserEventDispatcherPlugin(),
             new GatewayControllerEventDispatcherPlugin(),
         ];
@@ -103,6 +105,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ErrorPageEventDispatcherPlugin(),
             new RedirectUrlValidationEventDispatcherPlugin(),
             new EnvironmentInfoHeaderEventDispatcherPlugin(),
+            new LoginCaptchaEventDispatcherPlugin(),
             new SecurityBlockerBackofficeUserEventDispatcherPlugin(),
         ];
 

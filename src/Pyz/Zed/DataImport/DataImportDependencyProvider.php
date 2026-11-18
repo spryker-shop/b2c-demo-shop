@@ -19,6 +19,7 @@ use Spryker\Zed\CmsSlotDataImport\Communication\Plugin\CmsSlotTemplateDataImport
 use Spryker\Zed\ConfigurableBundleDataImport\Communication\Plugin\ConfigurableBundleTemplateDataImportPlugin;
 use Spryker\Zed\ConfigurableBundleDataImport\Communication\Plugin\ConfigurableBundleTemplateImageDataImportPlugin;
 use Spryker\Zed\ConfigurableBundleDataImport\Communication\Plugin\ConfigurableBundleTemplateSlotDataImportPlugin;
+use Spryker\Zed\Configuration\Communication\Plugin\DataImport\ConfigurationValueDataImportPlugin;
 use Spryker\Zed\ContentBannerDataImport\Communication\Plugin\ContentBannerDataImportPlugin;
 use Spryker\Zed\ContentNavigationDataImport\Communication\Plugin\DataImport\ContentNavigationDataImportPlugin;
 use Spryker\Zed\ContentProductDataImport\Communication\Plugin\ContentProductAbstractListDataImportPlugin;
@@ -253,6 +254,7 @@ class DataImportDependencyProvider extends SprykerDataImportDependencyProvider
             new StockAddressDataImportPlugin(),
             new CategoryStoreDataImportPlugin(),
             new ProductConfigurationDataImportPlugin(),
+            new ConfigurationValueDataImportPlugin(),
         ];
     }
 

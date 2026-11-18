@@ -19,6 +19,7 @@ use Spryker\Shared\CmsStorage\CmsStorageConstants;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\ConfigurableBundlePageSearch\ConfigurableBundlePageSearchConfig;
 use Spryker\Shared\ConfigurableBundleStorage\ConfigurableBundleStorageConfig;
+use Spryker\Shared\Configuration\ConfigurationConstants;
 use Spryker\Shared\ContentStorage\ContentStorageConfig;
 use Spryker\Shared\CustomerAccessStorage\CustomerAccessStorageConstants;
 use Spryker\Shared\CustomerStorage\CustomerStorageConfig;
@@ -105,6 +106,7 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             SearchHttpConfig::SEARCH_HTTP_CONFIG_SYNC_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             UrlStorageConfig::PUBLISH_URL_RETRY => new EventRetryQueueMessageProcessorPlugin(),
+            ConfigurationConstants::QUEUE_NAME_SYNC_CONFIGURATION => new SynchronizationStorageQueueMessageProcessorPlugin(),
         ];
     }
 

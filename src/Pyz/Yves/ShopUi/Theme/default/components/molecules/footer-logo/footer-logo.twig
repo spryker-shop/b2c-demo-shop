@@ -5,6 +5,10 @@
     name: 'footer-logo',
 } %}
 
+{% define data = {
+    configurable: false,
+} %}
+
 {% block body %}
     <a href="{{ 'footer.logo.url' | trans }}" class="{{ config.name }}__link">
         {% if attributes.src is empty %}

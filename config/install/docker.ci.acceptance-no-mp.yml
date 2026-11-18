@@ -49,6 +49,9 @@ sections:
         generate-scope-collection-file:
             command: 'vendor/bin/console oauth:scope-collection-file:generate'
 
+        configuration-sync:
+            command: 'vendor/bin/console configuration:sync'
+
     build-development:
         generate-transfers:
             command: 'vendor/bin/console transfer:generate'
@@ -111,6 +114,9 @@ sections:
 
         init-database:
             command: 'vendor/bin/console setup:init-db'
+
+        captcha-altcha-hmac-secret-generate:
+            command: 'vendor/bin/console captcha-altcha:hmac-secret:generate'
 
     demodata:
         queue-setup:
