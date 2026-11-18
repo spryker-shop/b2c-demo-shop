@@ -33,6 +33,7 @@ class FakeJira:
         self.comments = []
         self.existing = existing or []
         self.queries = []
+        self.transitioned = []
 
     def search(self, jql):
         self.queries.append(jql)
@@ -47,6 +48,12 @@ class FakeJira:
 
     def add_comment(self, key, body):
         self.comments.append((key, body))
+
+    def transitions(self, key):
+        return [{"id": "11", "to": {"name": "In Progress"}}, {"id": "31", "to": {"name": "Reopened"}}]
+
+    def transition(self, key, transition_id):
+        self.transitioned.append((key, transition_id))
 
     def browse_url(self, key):
         return key
@@ -99,6 +106,7 @@ class ScheduledBugLoggingTest(unittest.TestCase):
         self.assertIsNotNone(job, "B2C-SCHEDULED needs a bug-logging job for the Evaluator check")
         self.assertIn("evaluator", job["needs"])
         self.assertIn("needs.evaluator.result == 'failure'", str(job["if"]))
+        self.assertIn("vars.EVALUATOR_REPORT_ENABLED == 'true'", str(job["if"]))
         self.assertIn("github.event_name == 'schedule'", str(job["if"]))
         commands = " ".join(step.get("run", "") for step in job["steps"])
         self.assertIn("scheduled-bug-report.py", commands)
@@ -153,17 +161,36 @@ class ScheduledBugLoggingTest(unittest.TestCase):
         self.assertEqual([], jira.created)
         # A phrase of several words never matches in Jira text search, so the query filters by label and status only.
         self.assertIn('labels = "scheduled-run-failure"', jira.queries[0])
-        self.assertIn('status NOT IN ("Resolved", "Won\'t Do", "Shipped")', jira.queries[0])
+        self.assertIn('status != "Shipped"', jira.queries[0])
         self.assertNotIn("summary ~", jira.queries[0])
         self.assertEqual("CC-7", jira.comments[0][0])
         self.assertIn("https://ci/run/3", str(jira.comments[0][1]))
 
-    def testGivenOnlyClosedBugForSameCheckWhenCheckFailsAgainThenNewBugIsCreated(self):
+    def testGivenResolvedBugForSameCheckWhenCheckFailsAgainThenItIsReopenedWithACommentAndNoBugIsCreated(self):
+        for status in ("Resolved", "Won't Do"):
+            with self.subTest(status=status):
+                # Arrange
+                report = _load_script("scheduled-bug-report.py", "scheduled_bug_report")
+                summary = "Scheduled run failure: Evaluator check of B2C-SCHEDULED"
+                jira = FakeJira(existing=[{"key": "CC-7", "summary": summary, "status": status, "created": "2026-01-01"}])
+                reporter = report.ScheduledBugReporter(jira, SilentLog(), "https://ci/run/4")
+
+                # Act
+                key = reporter.report("B2C-SCHEDULED", "Evaluator")
+
+                # Assert
+                self.assertEqual("CC-7", key)
+                self.assertEqual([], jira.created)
+                self.assertEqual("CC-7", jira.comments[0][0])
+                self.assertEqual([("CC-7", "31")], jira.transitioned)
+                self.assertEqual(["CC-7"], jira.cleared)
+
+    def testGivenOnlyShippedBugForSameCheckWhenCheckFailsAgainThenNewBugIsCreated(self):
         # Arrange
         report = _load_script("scheduled-bug-report.py", "scheduled_bug_report")
         summary = "Scheduled run failure: Evaluator check of B2C-SCHEDULED"
-        jira = FakeJira(existing=[{"key": "CC-7", "summary": summary, "status": "Resolved", "created": "2026-01-01"}])
-        reporter = report.ScheduledBugReporter(jira, SilentLog(), "https://ci/run/4")
+        jira = FakeJira(existing=[{"key": "CC-7", "summary": summary, "status": "Shipped", "created": "2026-01-01"}])
+        reporter = report.ScheduledBugReporter(jira, SilentLog(), "https://ci/run/5")
 
         # Act
         key = reporter.report("B2C-SCHEDULED", "Evaluator")
@@ -171,6 +198,7 @@ class ScheduledBugLoggingTest(unittest.TestCase):
         # Assert
         self.assertEqual("CC-1", key)
         self.assertEqual([], jira.comments)
+        self.assertEqual([], jira.transitioned)
         self.assertEqual(1, len(jira.created))
 
 

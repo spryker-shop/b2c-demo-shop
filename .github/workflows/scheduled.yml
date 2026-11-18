@@ -74,10 +74,10 @@ jobs:
         name: "Log Evaluator Bug"
         needs: [evaluator]
         # A failed Evaluator check of the weekly run becomes a Jira bug labelled scheduled-run-failure.
-        # Same credentials, environment and switch as the SN-SCHEDULED bug jobs in spryker/suite.
+        # Same credentials and environment as the SN-SCHEDULED bug jobs in spryker/suite; switched by EVALUATOR_REPORT_ENABLED.
         if: >
             always()
-            && vars.FLAKY_JIRA_REPORT_ENABLED == 'true'
+            && vars.EVALUATOR_REPORT_ENABLED == 'true'
             && needs.evaluator.result == 'failure'
             && github.ref == 'refs/heads/master'
             && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')

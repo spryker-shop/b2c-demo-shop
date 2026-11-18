@@ -75,11 +75,15 @@ class ScheduledBugReporter:
 
     def report(self, pipeline, check):
         summary = SUMMARY_TEMPLATE.format(check=check, pipeline=pipeline)
-        open_ticket = self.find_open_ticket(summary)
-        if open_ticket is not None:
-            self.jira.add_comment(open_ticket["key"], flaky.to_document(comment_content(check, self.run_url)))
-            self.log.summary(f"Commented on {open_ticket['key']} for the {check} check of {pipeline}")
-            return open_ticket["key"]
+        ticket = self.find_ticket(summary)
+        if ticket is not None:
+            self.jira.add_comment(ticket["key"], flaky.to_document(comment_content(check, self.run_url)))
+            if ticket["status"] in flaky.CLOSED_STATUSES:
+                self.reopen(ticket["key"])
+                self.log.summary(f"Reopened {ticket['key']} for the {check} check of {pipeline}")
+            else:
+                self.log.summary(f"Commented on {ticket['key']} for the {check} check of {pipeline}")
+            return ticket["key"]
         key = self.jira.create_issue(
             {
                 "project": {"key": flaky.PROJECT_KEY},
@@ -103,18 +107,27 @@ class ScheduledBugReporter:
         self.log.summary(f"Created {key} for the {check} check of {pipeline}")
         return key
 
-    def find_open_ticket(self, summary):
+    def find_ticket(self, summary):
+        """The bug of this check that is not Shipped, an open one before a closed one; as in flaky-jira-report.py,
+        a Resolved or Won't Do bug is reopened and only a Shipped one leads to a new bug."""
         # A phrase of several words never matches in Jira text search (see flaky-jira-report.py), and the
-        # label leaves only a few summaries, so open tickets are filtered here and compared exactly below.
-        closed = flaky.CLOSED_STATUSES + (flaky.SHIPPED_STATUS,)
-        excluded = ", ".join(f'"{status}"' for status in closed)
+        # label leaves only a few summaries, so the candidates are compared exactly below.
         candidates = self.jira.search(
-            f'project = {flaky.PROJECT_KEY} AND labels = "{LABEL}" AND status NOT IN ({excluded}) ORDER BY created DESC'
+            f'project = {flaky.PROJECT_KEY} AND labels = "{LABEL}" AND status != "{flaky.SHIPPED_STATUS}" '
+            "ORDER BY created DESC"
         )
-        matches = [c for c in candidates if c["summary"] == summary and c["status"] not in closed]
+        matches = [c for c in candidates if c["summary"] == summary and c["status"] != flaky.SHIPPED_STATUS]
         if not matches:
             return None
-        return max(matches, key=lambda candidate: candidate["created"])
+        return max(matches, key=lambda c: (c["status"] not in flaky.CLOSED_STATUSES, c["created"]))
+
+    def reopen(self, key):
+        for transition in self.jira.transitions(key):
+            if (transition.get("to") or {}).get("name") == flaky.REOPENED_STATUS:
+                self.jira.transition(key, transition["id"])
+                self.jira.clear_assignee(key)
+                return
+        raise flaky.JiraRequestRejected(f"{key} has no transition to {flaky.REOPENED_STATUS}")
 
 
 def main(argv=None):
