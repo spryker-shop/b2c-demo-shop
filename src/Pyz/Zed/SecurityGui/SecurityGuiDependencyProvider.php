@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\SecurityGui;
 
+use Spryker\Zed\Captcha\Communication\Plugin\SecurityGui\UserLoginFormCaptchaExpanderPlugin;
 use Spryker\Zed\MultiFactorAuth\Communication\Plugin\AuthenticationHandler\User\UserMultiFactorAuthenticationHandlerPlugin;
 use Spryker\Zed\SecurityGui\SecurityGuiDependencyProvider as SprykerSecurityGuiDependencyProvider;
 use Spryker\Zed\WarehouseUser\Communication\Plugin\SecurityGui\WarehouseUserLoginRestrictionPlugin;
@@ -32,6 +33,16 @@ class SecurityGuiDependencyProvider extends SprykerSecurityGuiDependencyProvider
     {
         return [
             new UserMultiFactorAuthenticationHandlerPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\SecurityGuiExtension\Dependency\Plugin\UserLoginFormExpanderPluginInterface>
+     */
+    protected function getUserLoginFormExpanderPlugins(): array
+    {
+        return [
+            new UserLoginFormCaptchaExpanderPlugin(),
         ];
     }
 }

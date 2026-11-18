@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Yves\AgentPage;
 
+use Spryker\Yves\Captcha\Plugin\AgentPage\AgentLoginFormCaptchaExpanderPlugin;
 use Spryker\Yves\MultiFactorAuth\Plugin\AuthenticationHandler\Agent\AgentUserMultiFactorAuthenticationHandlerPlugin;
 use SprykerShop\Yves\AgentPage\AgentPageDependencyProvider as SprykerAgentPageDependencyProvider;
 use SprykerShop\Yves\SessionCustomerValidationPage\Plugin\AgentPage\CustomerUpdateSessionPostImpersonationPlugin;
@@ -32,6 +33,16 @@ class AgentPageDependencyProvider extends SprykerAgentPageDependencyProvider
     {
         return [
             new AgentUserMultiFactorAuthenticationHandlerPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\AgentPageExtension\Dependency\Plugin\AgentLoginFormExpanderPluginInterface>
+     */
+    protected function getAgentLoginFormExpanderPlugins(): array
+    {
+        return [
+            new AgentLoginFormCaptchaExpanderPlugin(),
         ];
     }
 }

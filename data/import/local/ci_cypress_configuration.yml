@@ -1,0 +1,9 @@
+# CI-only data import, run by the default CI database build (shared by the Codeception and Cypress jobs) and by the
+# Cypress acceptance install. Turns the CAPTCHA on, which is off by default, in the After Failed Attempts mode, and
+# locks an account after 5 failed logins, which the Cypress specs exercise. The per-IP and all-accounts CAPTCHA limits
+# are off: every spec logs in from the same IP address.
+version: 0
+
+actions:
+    - data_entity: configuration-value
+      source: data/import/common/common/ci_cypress_configuration_value.csv

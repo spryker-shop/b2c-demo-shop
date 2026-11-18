@@ -11,6 +11,7 @@ namespace Pyz\Yves\EventDispatcher;
 
 use Spryker\Shared\Http\Plugin\EventDispatcher\ResponseListenerEventDispatcherPlugin;
 use Spryker\Yves\Application\Communication\Plugin\EventDispatcher\HeadersSecurityEventDispatcherPlugin;
+use Spryker\Yves\Captcha\Plugin\EventDispatcher\LoginCaptchaEventDispatcherPlugin;
 use Spryker\Yves\Customer\Plugin\EventDispatcher\AnonymousIdSessionAssignEventDispatcherPlugin;
 use Spryker\Yves\EventDispatcher\EventDispatcherDependencyProvider as SprykerEventDispatcherDependencyProvider;
 use Spryker\Yves\Http\Plugin\EventDispatcher\CacheControlHeaderEventDispatcherPlugin;
@@ -67,6 +68,7 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new SaveSessionEventDispatcherPlugin(),
             new RedirectUrlValidationEventDispatcherPlugin(),
             new ResponseListenerEventDispatcherPlugin(),
+            new LoginCaptchaEventDispatcherPlugin(),
             new SecurityBlockerCustomerEventDispatcherPlugin(),
             new SecurityBlockerAgentEventDispatcherPlugin(),
             new SecurityBlockerCartCodeEventDispatcherPlugin(),

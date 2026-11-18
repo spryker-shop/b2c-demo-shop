@@ -55,6 +55,13 @@ sections:
         init-database:
             command: "vendor/bin/console setup:init-db -vvv --no-ansi"
 
+    configuration:
+        configuration-sync:
+            command: "vendor/bin/console configuration:sync -vvv --no-ansi"
+
+        captcha-altcha-hmac-secret-generate:
+            command: "vendor/bin/console captcha-altcha:hmac-secret:generate -vvv --no-ansi"
+
     demodata:
         import-eu-region-demodata:
             command: "vendor/bin/console data:import --config=data/import/production/full_US.yml"

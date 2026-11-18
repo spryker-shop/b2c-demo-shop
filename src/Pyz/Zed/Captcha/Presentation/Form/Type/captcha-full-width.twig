@@ -1,0 +1,7 @@
+{% use '@Captcha/Form/Type/captcha.twig' with captcha_widget as captcha_widget_default %}
+
+{% block captcha_widget %}
+    <div style="--altcha-max-width: 100%;">
+        {{- block('captcha_widget_default') -}}
+    </div>
+{% endblock %}

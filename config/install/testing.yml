@@ -6,6 +6,9 @@ sections:
         generate-transfers:
             command: 'vendor/bin/console transfer:generate'
 
+        configuration-synchronisation:
+            command: 'vendor/bin/console configuration:sync'
+
         generate-transfer-databuilders:
             command: 'vendor/bin/console transfer:databuilder:generate'
 
@@ -99,6 +102,9 @@ sections:
 
         init-database:
             command: 'vendor/bin/console setup:init-db'
+
+        captcha-altcha-hmac-secret-generate:
+            command: 'vendor/bin/console captcha-altcha:hmac-secret:generate'
 
         setup-search-create-sources:
             command: 'vendor/bin/console search:setup:sources'

@@ -43,6 +43,7 @@ use Spryker\Zed\CategoryStorage\Communication\Plugin\Publisher\CategoryTreePubli
 use Spryker\Zed\CategoryStorage\Communication\Plugin\Publisher\ParentWritePublisherPlugin;
 use Spryker\Zed\Cms\Communication\Plugin\Publisher\CmsPageUpdateMessageBrokerPublisherPlugin;
 use Spryker\Zed\Cms\Communication\Plugin\Publisher\CmsPageVersionPublishedMessageBrokerPublisherPlugin;
+use Spryker\Zed\Configuration\Communication\Plugin\Publisher\ConfigurationValueWritePublisherPlugin;
 use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Publisher\CustomerAccessPublisherTriggerPlugin;
 use Spryker\Zed\CustomerStorage\Communication\Plugin\Publisher\Customer\CustomerInvalidatedWritePublisherPlugin;
 use Spryker\Zed\FileManagerStorage\Communication\Plugin\Publisher\FileManagerPublisherTriggerPlugin;
@@ -149,6 +150,7 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
             $this->getTaxAppPlugins(),
             $this->getProductStoragePlugins(),
             $this->getCmsPageMessageBrokerPlugins(),
+            $this->getConfigurationStoragePlugins(),
         );
     }
 
@@ -457,6 +459,16 @@ class PublisherDependencyProvider extends SprykerPublisherDependencyProvider
         return [
             new CmsPageVersionPublishedMessageBrokerPublisherPlugin(),
             new CmsPageUpdateMessageBrokerPublisherPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherPluginInterface>
+     */
+    protected function getConfigurationStoragePlugins(): array
+    {
+        return [
+            new ConfigurationValueWritePublisherPlugin(),
         ];
     }
 }
