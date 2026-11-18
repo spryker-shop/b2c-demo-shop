@@ -108,8 +108,6 @@ class ScheduledBugReporter:
         return key
 
     def find_ticket(self, summary):
-        """The bug of this check that is not Shipped, an open one before a closed one; as in flaky-jira-report.py,
-        a Resolved or Won't Do bug is reopened and only a Shipped one leads to a new bug."""
         # A phrase of several words never matches in Jira text search (see flaky-jira-report.py), and the
         # label leaves only a few summaries, so the candidates are compared exactly below.
         candidates = self.jira.search(
