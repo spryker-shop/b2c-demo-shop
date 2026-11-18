@@ -18,7 +18,6 @@ Usage:
 import argparse
 import importlib.util
 import os
-import re
 import sys
 
 LABEL = "scheduled-run-failure"
@@ -105,12 +104,13 @@ class ScheduledBugReporter:
         return key
 
     def find_open_ticket(self, summary):
-        # `~` matches words, not the exact summary, so the candidates are compared exactly below.
-        words = re.sub(r'["\\]', " ", summary)
-        candidates = self.jira.search(
-            f'project = {flaky.PROJECT_KEY} AND labels = "{LABEL}" AND summary ~ "{words}" ORDER BY created DESC'
-        )
+        # A phrase of several words never matches in Jira text search (see flaky-jira-report.py), and the
+        # label leaves only a few summaries, so open tickets are filtered here and compared exactly below.
         closed = flaky.CLOSED_STATUSES + (flaky.SHIPPED_STATUS,)
+        excluded = ", ".join(f'"{status}"' for status in closed)
+        candidates = self.jira.search(
+            f'project = {flaky.PROJECT_KEY} AND labels = "{LABEL}" AND status NOT IN ({excluded}) ORDER BY created DESC'
+        )
         matches = [c for c in candidates if c["summary"] == summary and c["status"] not in closed]
         if not matches:
             return None

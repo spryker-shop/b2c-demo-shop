@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Characterisation tests for the scheduled workflow: a green run logs no Jira bug.
+"""Tests for the scheduled workflow's bug logging: when it runs, what it creates, and when it comments instead.
 
 Static, network-free. Run with:
     python3 .github/workflows/scripts/test_scheduled_bug_logging.py
@@ -32,8 +32,10 @@ class FakeJira:
         self.cleared = []
         self.comments = []
         self.existing = existing or []
+        self.queries = []
 
     def search(self, jql):
+        self.queries.append(jql)
         return self.existing
 
     def create_issue(self, fields):
@@ -149,6 +151,10 @@ class ScheduledBugLoggingTest(unittest.TestCase):
         # Assert
         self.assertEqual("CC-7", key)
         self.assertEqual([], jira.created)
+        # A phrase of several words never matches in Jira text search, so the query filters by label and status only.
+        self.assertIn('labels = "scheduled-run-failure"', jira.queries[0])
+        self.assertIn('status NOT IN ("Resolved", "Won\'t Do", "Shipped")', jira.queries[0])
+        self.assertNotIn("summary ~", jira.queries[0])
         self.assertEqual("CC-7", jira.comments[0][0])
         self.assertIn("https://ci/run/3", str(jira.comments[0][1]))
 
