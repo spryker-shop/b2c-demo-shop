@@ -48,6 +48,7 @@ use Spryker\Glue\Log\Plugin\GlueLoggerConfigPlugin;
 use Spryker\Glue\Log\Plugin\Log\GlueBackendSecurityAuditLoggerConfigPlugin;
 use Spryker\Glue\Log\Plugin\Log\GlueSecurityAuditLoggerConfigPlugin;
 use Spryker\Service\FlysystemAws3v3FileSystem\Plugin\Flysystem\Aws3v3FilesystemBuilderPlugin;
+use Spryker\Service\FlysystemAws3v3FileSystem\Plugin\Flysystem\IamAws3v3FilesystemBuilderPlugin;
 use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
 use Spryker\Shared\Acl\AclConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
@@ -664,6 +665,24 @@ $config[FileSystemConstants::FILESYSTEM_SERVICE] = [
         'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
         'root' => APPLICATION_ROOT_DIR . '/data/DE/media/',
         'path' => 'files/',
+    ],
+    'backoffice-media' => [
+        'sprykerAdapterClass' => IamAws3v3FilesystemBuilderPlugin::class,
+        'bucket' => getenv('SPRYKER_S3_PUBLIC_ASSETS_BUCKET') ?: '',
+        'region' => getenv('AWS_REGION') ?: '',
+        'path' => '/backoffice-media',
+    ],
+    'storefront-media' => [
+        'sprykerAdapterClass' => IamAws3v3FilesystemBuilderPlugin::class,
+        'bucket' => getenv('SPRYKER_S3_PUBLIC_ASSETS_BUCKET') ?: '',
+        'region' => getenv('AWS_REGION') ?: '',
+        'path' => '/storefront-media',
+    ],
+    'merchant-portal-media' => [
+        'sprykerAdapterClass' => IamAws3v3FilesystemBuilderPlugin::class,
+        'bucket' => getenv('SPRYKER_S3_PUBLIC_ASSETS_BUCKET') ?: '',
+        'region' => getenv('AWS_REGION') ?: '',
+        'path' => '/merchant-portal-media',
     ],
 ];
 $config[FileManagerConstants::STORAGE_NAME] = 'files';

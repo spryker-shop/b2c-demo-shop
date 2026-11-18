@@ -1,6 +1,15 @@
 {% extends molecule('logo', '@SprykerShop:ShopUi') %}
 {% import _self as component %}
 
+{% define data = {
+    configurable: true,
+} %}
+
+{% define attributes = {
+    src: data.configurable ? configurationValue('theme:logos:logos:yves_logo_url') : null,
+    alt: 'Logo',
+} %}
+
 {% block body %}
     <a href="{{ data.url }}" class="{{ config.name }}__link">
         {% if attributes.src is empty %}
