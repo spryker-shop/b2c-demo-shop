@@ -19,6 +19,7 @@ use Spryker\Shared\CmsPageSearch\CmsPageSearchConstants;
 use Spryker\Shared\CmsStorage\CmsStorageConstants;
 use Spryker\Shared\ConfigurableBundlePageSearch\ConfigurableBundlePageSearchConfig;
 use Spryker\Shared\ConfigurableBundleStorage\ConfigurableBundleStorageConfig;
+use Spryker\Shared\Configuration\ConfigurationConstants;
 use Spryker\Shared\ContentStorage\ContentStorageConfig;
 use Spryker\Shared\CustomerAccessStorage\CustomerAccessStorageConstants;
 use Spryker\Shared\CustomerStorage\CustomerStorageConfig;
@@ -153,6 +154,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
             AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE,
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE,
             SearchHttpConfig::SEARCH_HTTP_CONFIG_SYNC_QUEUE,
+            ConfigurationConstants::QUEUE_NAME_SYNC_CONFIGURATION,
         ];
     }
 

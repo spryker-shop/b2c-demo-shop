@@ -10,6 +10,7 @@ declare(strict_types = 1);
 namespace Pyz\Zed\Application;
 
 use Spryker\Zed\Application\ApplicationDependencyProvider as SprykerApplicationDependencyProvider;
+use Spryker\Zed\Configuration\Communication\Plugin\Application\ConfigurationApplicationPlugin;
 use Spryker\Zed\Currency\Communication\Plugin\Application\CurrencyBackendGatewayApplicationPlugin;
 use Spryker\Zed\ErrorHandler\Communication\Plugin\Application\ErrorHandlerApplicationPlugin;
 use Spryker\Zed\EventDispatcher\Communication\Plugin\Application\BackendApiEventDispatcherApplicationPlugin;
@@ -92,6 +93,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new ZedSecurityApplicationPlugin(),
             new NumberFormatterApplicationPlugin(),
             new BackofficeStoreApplicationPlugin(),
+            new ConfigurationApplicationPlugin(),
         ];
         if (class_exists(WebProfilerApplicationPlugin::class)) {
             $plugins[] = new WebProfilerApplicationPlugin();
@@ -119,6 +121,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new PropelApplicationPlugin(),
             new BackendGatewayRouterApplicationPlugin(),
             new HttpApplicationPlugin(),
+            new ConfigurationApplicationPlugin(),
         ];
     }
 
@@ -135,6 +138,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new BackendApiRouterApplicationPlugin(),
             new HttpApplicationPlugin(),
             new ValidatorApplicationPlugin(),
+            new ConfigurationApplicationPlugin(),
         ];
     }
 }

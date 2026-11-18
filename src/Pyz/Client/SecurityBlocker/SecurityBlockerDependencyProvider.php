@@ -11,8 +11,10 @@ namespace Pyz\Client\SecurityBlocker;
 
 use Spryker\Client\SecurityBlocker\SecurityBlockerDependencyProvider as SprykerSecurityBlockerDependencyProvider;
 use Spryker\Client\SecurityBlockerBackoffice\Plugin\SecurityBlocker\BackofficeUserSecurityBlockerConfigurationSettingsExpanderPlugin;
+use Spryker\Client\SecurityBlockerBackoffice\Plugin\SecurityBlocker\UserSecurityBlockerLoginRealmConfigurationExpanderPlugin;
 use Spryker\Client\SecurityBlockerStorefrontAgent\Plugin\SecurityBlocker\AgentSecurityBlockerConfigurationSettingsExpanderPlugin;
 use Spryker\Client\SecurityBlockerStorefrontCustomer\Plugin\SecurityBlocker\CustomerSecurityBlockerConfigurationSettingsExpanderPlugin;
+use Spryker\Client\SecurityBlockerStorefrontCustomer\Plugin\SecurityBlocker\CustomerSecurityBlockerLoginRealmConfigurationExpanderPlugin;
 
 /**
  * @method \Spryker\Client\SecurityBlocker\SecurityBlockerConfig getConfig()
@@ -28,6 +30,17 @@ class SecurityBlockerDependencyProvider extends SprykerSecurityBlockerDependency
             new BackofficeUserSecurityBlockerConfigurationSettingsExpanderPlugin(),
             new AgentSecurityBlockerConfigurationSettingsExpanderPlugin(),
             new CustomerSecurityBlockerConfigurationSettingsExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Client\SecurityBlockerExtension\Dependency\Plugin\SecurityBlockerLoginRealmConfigurationExpanderPluginInterface>
+     */
+    protected function getSecurityBlockerLoginRealmConfigurationExpanderPlugins(): array
+    {
+        return [
+            new CustomerSecurityBlockerLoginRealmConfigurationExpanderPlugin(),
+            new UserSecurityBlockerLoginRealmConfigurationExpanderPlugin(),
         ];
     }
 }

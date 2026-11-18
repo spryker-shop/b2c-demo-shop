@@ -45,6 +45,9 @@ sections:
         generate-open-telemetry:
             command: 'vendor/bin/console open-telemetry:generate'
 
+        configuration-sync:
+            command: 'vendor/bin/console configuration:sync'
+
     build-production:
         excluded: true
         cache-class-resolver-build:
@@ -141,6 +144,9 @@ sections:
 
         init-database:
             command: 'vendor/bin/console setup:init-db'
+
+        captcha-altcha-hmac-secret-generate:
+            command: 'vendor/bin/console captcha-altcha:hmac-secret:generate'
 
     demodata:
         queue-setup:

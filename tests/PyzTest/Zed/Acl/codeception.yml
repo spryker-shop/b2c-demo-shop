@@ -1,0 +1,24 @@
+namespace: PyzTest\Zed\Acl
+
+paths:
+    tests: .
+    data: _data
+    support: _support
+    output: _output
+
+coverage:
+    enabled: true
+    remote: false
+    whitelist: { include: ['../../../../src/*'] }
+
+suites:
+    Communication:
+        path: Communication
+        actor: AclCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\ConfigHelper
+                - \PyzTest\Zed\Testify\Helper\LoginHelper
+                - \PyzTest\Zed\Testify\Helper\BootstrapHelper

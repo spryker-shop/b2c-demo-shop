@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\DataImport;
 
+use Spryker\Zed\Configuration\ConfigurationConfig;
 use Spryker\Zed\DataImport\DataImportConfig as SprykerDataImportConfig;
 use Spryker\Zed\StockAddressDataImport\StockAddressDataImportConfig;
 
@@ -226,6 +227,7 @@ class DataImportConfig extends SprykerDataImportConfig
     {
         $customImportTypes = [
             StockAddressDataImportConfig::IMPORT_TYPE_STOCK_ADDRESS,
+            ConfigurationConfig::IMPORT_TYPE_CONFIGURATION_VALUE,
         ];
 
         return array_merge(parent::getFullImportTypes(), $customImportTypes);

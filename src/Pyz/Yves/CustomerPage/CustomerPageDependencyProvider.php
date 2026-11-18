@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Yves\CustomerPage;
 
+use Spryker\Yves\Captcha\Plugin\CustomerPage\CustomerLoginFormCaptchaExpanderPlugin;
 use Spryker\Yves\MultiFactorAuth\Plugin\AuthenticationHandler\Customer\CustomerMultiFactorAuthenticationHandlerPlugin;
 use SprykerShop\Yves\AgentPage\Plugin\Security\UpdateAgentTokenAfterCustomerAuthenticationSuccessPlugin;
 use SprykerShop\Yves\CustomerPage\CustomerPageDependencyProvider as SprykerShopCustomerPageDependencyProvider;
@@ -34,6 +35,16 @@ class CustomerPageDependencyProvider extends SprykerShopCustomerPageDependencyPr
     {
         return [
             new CustomerMultiFactorAuthenticationHandlerPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\SprykerShop\Yves\CustomerPageExtension\Dependency\Plugin\CustomerLoginFormExpanderPluginInterface>
+     */
+    protected function getCustomerLoginFormExpanderPlugins(): array
+    {
+        return [
+            new CustomerLoginFormCaptchaExpanderPlugin(),
         ];
     }
 }

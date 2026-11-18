@@ -12,6 +12,7 @@ use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
 use Spryker\Shared\SecurityBlockerBackoffice\SecurityBlockerBackofficeConstants;
 use Spryker\Shared\SecurityBlockerStorefrontAgent\SecurityBlockerStorefrontAgentConstants;
 use Spryker\Shared\SecurityBlockerStorefrontCustomer\SecurityBlockerStorefrontCustomerConstants;
+use SprykerEco\Shared\CaptchaAltcha\CaptchaAltchaConstants;
 
 require 'config_default-docker.ci.php';
 
@@ -29,3 +30,6 @@ $config[SecurityBlockerConstants::SECURITY_BLOCKER_BLOCKING_NUMBER_OF_ATTEMPTS] 
 $config[SecurityBlockerStorefrontAgentConstants::AGENT_BLOCKING_NUMBER_OF_ATTEMPTS] = 1000;
 $config[SecurityBlockerStorefrontCustomerConstants::CUSTOMER_BLOCKING_NUMBER_OF_ATTEMPTS] = 1000;
 $config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCKING_NUMBER_OF_ATTEMPTS] = 1000;
+$config[CaptchaAltchaConstants::COST] = 1;
+$config[CaptchaAltchaConstants::MEMORY_COST] = 1024;
+$config[CaptchaAltchaConstants::MINIMUM_COUNTER] = 2;

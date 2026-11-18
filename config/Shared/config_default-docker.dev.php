@@ -3,6 +3,7 @@
 declare(strict_types = 1);
 
 use Monolog\Logger;
+use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Customer\CustomerConstants;
@@ -13,6 +14,8 @@ use Spryker\Shared\ErrorHandler\ErrorRenderer\ApiErrorRenderer;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebExceptionErrorRenderer;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebHtmlErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
+use Spryker\Shared\FileSystem\FileSystemConstants;
+use Spryker\Shared\Flysystem\FlysystemConstants;
 use Spryker\Shared\GlueApplication\GlueApplicationConstants;
 use Spryker\Shared\GlueBackendApiApplication\GlueBackendApiApplicationConstants;
 use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
@@ -201,4 +204,28 @@ if ($isTestifyConstantsClassExists) {
         $sprykerGlueStorefrontHost,
         $sprykerGlueStorefrontPort !== 80 ? ':' . $sprykerGlueStorefrontPort : '',
     );
+}
+
+// ----------------------------------------------------------------------------
+// ------------------------------ FILESYSTEM ----------------------------------
+// ----------------------------------------------------------------------------
+if (!getenv('SPRYKER_S3_PUBLIC_ASSETS_BUCKET')) {
+    $publicUrl = sprintf(
+        '%s%s',
+        $config[ApplicationConstants::BASE_URL_YVES],
+        '/assets/static/images',
+    );
+
+    $localMediaFilesystemConfig = [
+        'sprykerAdapterClass' => LocalFilesystemBuilderPlugin::class,
+        'root' => APPLICATION_ROOT_DIR . '/public/Yves/assets/static/images',
+        'path' => '',
+    ];
+
+    $config[FileSystemConstants::FILESYSTEM_SERVICE]['backoffice-media'] = $localMediaFilesystemConfig;
+    $config[FileSystemConstants::FILESYSTEM_SERVICE]['storefront-media'] = $localMediaFilesystemConfig;
+    $config[FileSystemConstants::FILESYSTEM_SERVICE]['merchant-portal-media'] = $localMediaFilesystemConfig;
+    $config[FlysystemConstants::FLYSYSTEM_OPTIONS] = [
+        'public_url' => $publicUrl,
+    ];
 }

@@ -18,6 +18,8 @@ class SecurityBlockerPageConfig extends SprykerSecurityBlockerPageConfig
      */
     protected const USE_EMAIL_CONTEXT_FOR_LOGIN_SECURITY_BLOCKER = false;
 
+    protected const string LOGIN_PROTECTION_STRATEGY = self::LOGIN_PROTECTION_STRATEGY_IP_AND_ACCOUNT;
+
     /**
      * {@inheritDoc}
      *
