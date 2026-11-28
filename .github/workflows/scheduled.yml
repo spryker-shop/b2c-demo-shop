@@ -69,3 +69,30 @@ jobs:
                 # continue-on-error keeps a Slack outage from reddening an otherwise green run.
                 if: always()
                 continue-on-error: true
+
+    log-evaluator-bug:
+        name: "Log Evaluator Bug"
+        needs: [evaluator]
+        # A failed Evaluator check of the weekly run becomes a Jira bug labelled scheduled-run-failure.
+        # Same credentials and environment as the SN-SCHEDULED bug jobs in spryker/suite; switched by EVALUATOR_REPORT_ENABLED.
+        if: >
+            always()
+            && vars.EVALUATOR_REPORT_ENABLED == 'true'
+            && needs.evaluator.result == 'failure'
+            && github.ref == 'refs/heads/master'
+            && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        runs-on: ubuntu-latest
+        environment: flaky-reporting
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Log the failed Evaluator check to Jira
+                env:
+                    FLAKY_JIRA_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+                    FLAKY_JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+                    JIRA_BASE_URL: https://spryker.atlassian.net
+                    JIRA_API_BASE_URL: https://api.atlassian.com/ex/jira/180898d7-3b81-493b-89a0-4d56fd3f89b2
+                    RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+                run: |
+                    python3 .github/workflows/scripts/scheduled-bug-report.py \
+                        --pipeline B2C-SCHEDULED --check Evaluator --run-url "$RUN_URL"
